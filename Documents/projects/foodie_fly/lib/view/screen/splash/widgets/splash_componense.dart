@@ -30,10 +30,10 @@ class SplashComponeses extends StatelessWidget {
                     style: TextStyle(
                       backgroundColor: white,
                       decoration: TextDecoration.underline,
-                      decorationColor: black,
+                      decorationColor: yellowGreen,
                       decorationStyle: TextDecorationStyle.wavy,
                       fontSize: 50,
-                      color: black,
+                      color: yellowGreen,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
