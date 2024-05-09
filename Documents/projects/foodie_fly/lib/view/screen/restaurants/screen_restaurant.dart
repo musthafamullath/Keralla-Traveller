@@ -73,9 +73,9 @@ class ScreenRestaurants extends StatelessWidget {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
                                         border: Border.all(
-                                            width: 2,
+                                            width: 1,
                                             color: Colors.grey.shade300),
-                                        color: Colors.grey.shade300,
+                                        color: Colors.grey.shade200,
                                         boxShadow: const [
                                           BoxShadow(
                                             blurRadius: 2,
@@ -90,11 +90,11 @@ class ScreenRestaurants extends StatelessWidget {
                                         children: <Widget>[
                                           kWidth10,
                                           Container(
-                                            decoration: BoxDecoration(border: Border.all(width: 2,color: Colors.grey.shade300),
+                                            decoration: BoxDecoration(border: Border.all(width: 2,color: Colors.grey.shade50),
                                                       shape: BoxShape.circle,),
                                             child: CircleAvatar(
                                               radius: 50,
-                                              backgroundColor: Colors.grey.shade200,
+                                              backgroundColor: Colors.grey.shade300,
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(10.0),
@@ -107,7 +107,7 @@ class ScreenRestaurants extends StatelessWidget {
                                                           border: Border.all(
                                                               width: 3,
                                                               color:
-                                                                  Colors.grey.shade300),
+                                                                  Colors.grey.shade200),
                                                           shape: BoxShape.circle,
                                                         ),
                                                         child: Container(

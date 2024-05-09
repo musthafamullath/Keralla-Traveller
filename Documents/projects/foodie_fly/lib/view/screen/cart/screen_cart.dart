@@ -57,7 +57,7 @@ class ScreenCart extends StatelessWidget {
                               padding: const EdgeInsets.all(15),
                               width: width,
                               decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
+                                  color: Colors.grey.shade50,
                                   borderRadius: BorderRadius.circular(20),
                                   border: Border.all(
                                       width: 2, color: Colors.grey.shade300)),
@@ -299,7 +299,7 @@ class ScreenCart extends StatelessWidget {
                               width: width,
                               padding: const EdgeInsets.all(24),
                               decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
+                                color: Colors.grey.shade50,
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(width: 2,color: Colors.grey.shade300)
                               ),
@@ -386,7 +386,7 @@ class ScreenCart extends StatelessWidget {
                               padding: const EdgeInsets.all(18),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.grey.shade200,
+                                color: Colors.grey.shade50,
                                 border: Border.all(width: 2,color: Colors.grey.shade300)
                               ),
                               child: Column(

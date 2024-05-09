@@ -37,6 +37,7 @@ class _ScreenAddressesState extends State<ScreenAddresses> {
                 builder: (context, state) {
                   return ListView.builder(
                     shrinkWrap: true,
+                    physics:const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -50,7 +51,7 @@ class _ScreenAddressesState extends State<ScreenAddresses> {
                           width: width,
                           decoration: BoxDecoration(
                             color: state.index == index
-                                ? Colors.grey.shade300
+                                ? Colors.green.shade50
                                 : Colors.white,
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Colors.grey.shade400 ,width: 2),

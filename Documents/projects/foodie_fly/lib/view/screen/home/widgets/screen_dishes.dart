@@ -30,7 +30,7 @@ class ScreenDishes extends StatelessWidget {
       child: Container(
         padding:const EdgeInsets.symmetric(vertical: 20),
         decoration: BoxDecoration(
-          color: Colors.grey.shade300,
+          color: Colors.grey.shade50,
           borderRadius: BorderRadius.circular(10),
         ),
         child: GridView.builder(
@@ -67,15 +67,15 @@ class ScreenDishes extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           reversedOfferList[index].offerTitle,
-                          style: boldGrey,
+                          style: regularGrey,
                         ),
                         BlocBuilder<RestaurantBloc, RestaurantState>(
                           builder: (context, state) {
                             return Row(
                               children: [
                                 Text(
-                                  state.seller?.name ?? 'Ajwa',
-                                  style: boldGrey,
+                                  state.seller?.name ?? ' ',
+                                  style: regularGrey,
                                 ),
                               ],
                             );

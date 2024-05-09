@@ -40,8 +40,8 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.all(15),
           decoration: BoxDecoration(
-            border: Border.all(width: 2,color: Colors.grey.shade300),
-            color: Colors.grey.shade200,
+            border: Border.all(width: 2,color: Colors.grey.shade200),
+            color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(30)
           ),
           child: Column(

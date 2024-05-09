@@ -16,7 +16,7 @@ class SearchTextField extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         placeholder: text,
         placeholderStyle: const TextStyle(color: white),
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.green.shade50,
         prefixIcon: Padding(
           padding: const EdgeInsets.only(left: 10),
           child: Icon(CupertinoIcons.search, color: greenPointShade800,size: 32,),

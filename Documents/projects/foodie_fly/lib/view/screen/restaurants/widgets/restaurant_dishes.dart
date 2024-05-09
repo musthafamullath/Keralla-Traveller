@@ -69,7 +69,7 @@ class ScreenRestaurantDishes extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.grey.shade300,width:2),
                                   borderRadius: BorderRadius.circular(20),
-                                  color: Colors.grey.shade200,
+                                  color: Colors.grey.shade50,
                                 ),
                                 child: Row(
                                   mainAxisAlignment:

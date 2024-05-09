@@ -25,10 +25,10 @@ class ScreenDishDetails extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 15, left: 7.5, right: 7.5),
+          padding: const EdgeInsets.only(top: 15, left: 7.5, right: 7.5,bottom: 7.5),
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade50,
                 borderRadius: BorderRadius.circular(30)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,13 +69,14 @@ class ScreenDishDetails extends StatelessWidget {
                 ),
                 kHight20,
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 7.5),
+                  padding: const EdgeInsets.symmetric(horizontal: 7.5,vertical: 7.5),
                   child: AddToCartButton(
                     width: width,
                     height: height,
                     dish: dish,
                   ),
                 ),
+                  kHight30,
               ],
             ),
           ),

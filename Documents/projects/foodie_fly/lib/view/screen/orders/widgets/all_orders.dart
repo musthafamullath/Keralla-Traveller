@@ -52,7 +52,7 @@ class AllOrders extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               margin: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: Colors.grey[50],
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.grey.shade300,width: 1),
               ),

@@ -28,7 +28,7 @@ class ScreenOffer extends StatelessWidget {
     }
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.shade300,
+        color: Colors.grey.shade50,
         borderRadius: BorderRadius.circular(30),
       ),
       height: height * .38,
@@ -79,7 +79,7 @@ class ScreenOffer extends StatelessWidget {
                               children: <Widget>[
                                 Text(
                                   offers[index].offerTitle,
-                                  style: boldGrey,
+                                  style: regularGrey,
                                 )
                               ],
                             ),
@@ -88,8 +88,8 @@ class ScreenOffer extends StatelessWidget {
                                 return Row(
                                   children: [
                                     Text(
-                                      state.seller?.name ?? 'Ajwa',
-                                      style: semiBoldGrey,
+                                      state.seller?.name ?? ' ',
+                                      style: regularGrey,
                                     ),
                                   ],
                                 );
@@ -100,7 +100,7 @@ class ScreenOffer extends StatelessWidget {
                                 Text(
                                   DateFormat.yMMMMd('en_US').format(
                                       DateTime.parse(offers[index].endDate)),
-                                  style: semiBoldGrey,
+                                  style: regularGrey,
                                 ),
                               ],
                             ),
@@ -111,11 +111,11 @@ class ScreenOffer extends StatelessWidget {
                           radius: 20,
                           backgroundColor: Colors.grey.shade300,
                           child: CircleAvatar(
-                            radius: 18,
+                            radius: 19,
                             backgroundColor: white,
                             child: Text(
                               '${offers[index].offerPercentage.toString()}%',
-                              style: semiBoldGreen,
+                              style: regularGreen,
                             ),
                           ),
                         )
@@ -131,7 +131,7 @@ class ScreenOffer extends StatelessWidget {
           reverse: true,
           height: pictureSizewidth * 0.70,
           autoPlay: true,
-          viewportFraction: 0.59,
+          viewportFraction: 0.60,
           enableInfiniteScroll: true,
           pageSnapping: true,
           autoPlayCurve: Curves.fastEaseInToSlowEaseOut,

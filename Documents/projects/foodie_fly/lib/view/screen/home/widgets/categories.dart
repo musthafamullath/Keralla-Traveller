@@ -19,7 +19,7 @@ class CategoriesGridview extends StatelessWidget {
     context.read<CategoryBloc>().add(CategoryEvent());
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Colors.grey.shade50,
         borderRadius: BorderRadius.circular(30),
       ),
       child: BlocBuilder<CategoryBloc, CategoryState>(

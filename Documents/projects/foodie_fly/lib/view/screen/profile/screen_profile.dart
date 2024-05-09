@@ -40,7 +40,7 @@ class ScreenProfile extends StatelessWidget {
                           margin: const EdgeInsets.only(bottom: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Colors.grey.shade200,
+                              color: Colors.grey.shade50,
                               border: Border.all(
                                   color: Colors.grey.shade300, width: 2)),
                           width: size * 7 / 10,

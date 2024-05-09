@@ -18,7 +18,7 @@ class SearchTextFieldForFood extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       placeholder: text,
       placeholderStyle: const TextStyle(color: white),
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.green.shade50,
       prefixIcon: const Padding(
         padding:  EdgeInsets.only(left: 10),
         child: Icon(

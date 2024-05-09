@@ -20,7 +20,7 @@ class ApplyCouponContainer extends StatelessWidget {
       height: height * .2,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Colors.grey.shade50,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(width: 2,color: Colors.grey.shade300)
       ),

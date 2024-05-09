@@ -25,8 +25,8 @@ class AddToCartButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         SizedBox(
-          width: width - 250,
-          height: height * 00000.5/10,
+          width: width *4/10,
+          height: height * 0.5/10,
           child: BlocListener<CartBloc, CartState>(
             listener: (context, state) {
               if(state is AddToCartState){
@@ -46,7 +46,7 @@ class AddToCartButton extends StatelessWidget {
               ),
               label: const Text(
                 'Add to bag',
-                style: semiBoldWhite,
+                style: regularWhite,
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: yellowGreen,

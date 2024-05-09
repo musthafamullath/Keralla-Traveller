@@ -51,8 +51,8 @@ class ScreenCheckout extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         border:
-                            Border.all(color: Colors.grey.shade300, width: 2),
-                        color: Colors.grey.shade200),
+                            Border.all(color: Colors.grey.shade200, width: 2),
+                        color: Colors.grey.shade50),
                     child: Column(
                       children: [
                         ItemRow(
@@ -96,12 +96,12 @@ class ScreenCheckout extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
+                        color: Colors.grey.shade50,
                         borderRadius: BorderRadius.circular(15)),
                     child: DottedBorder(
                       radius: const Radius.circular(20),
                       borderType: BorderType.RRect,
-                      color: Colors.grey.shade400,
+                      color: Colors.grey.shade200,
                       strokeWidth: 2,
                       dashPattern: const [5, 5],
                       child: ListTile(
