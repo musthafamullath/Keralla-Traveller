@@ -138,7 +138,7 @@ class _ScreenAddDishesState extends State<ScreenAddDishes> {
                                 height: heightSize * .3,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
-                                    color: Colors.grey.shade300),
+                                    color: Colors.grey.shade200),
                                 child: (widget.operatior == Operatior.add)
                                     ? image != ''
                                         ? Image.file(File(image))

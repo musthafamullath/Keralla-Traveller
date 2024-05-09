@@ -66,7 +66,7 @@ class _ScreenAddOfferState extends State<ScreenAddOffer> {
                     height: height * .3,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                     color: Colors.grey.shade300
+                     color: Colors.grey.shade200
                     ),
                     child: image != ''
                         ? Image.file(File(image))
@@ -98,7 +98,7 @@ class _ScreenAddOfferState extends State<ScreenAddOffer> {
                   builder: (context, state) {
                     return Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
+                        color: Colors.grey.shade200,
                         borderRadius: BorderRadius.circular(10)
                       ),
                       child: DropdownButtonFormField(

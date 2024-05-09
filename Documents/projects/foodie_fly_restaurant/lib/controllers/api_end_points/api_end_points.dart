@@ -1,5 +1,5 @@
 class ApiEndPoints {
-  static const String baseUrl = 'http://10.0.2.2:8989';
+  static const String baseUrl = 'https://foodiefly.vajid.tech';
   // static const String baseUrl = 'https://l6t4rpf1-8989.inc1.devtunnels.ms';
   static const String sellerRegister = '/seller/register';
   static const String sellerLogin = '/seller/login';

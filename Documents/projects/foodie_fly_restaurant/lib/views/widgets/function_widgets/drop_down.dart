@@ -30,9 +30,9 @@ class DropDownWidget extends StatelessWidget {
         : '';
     return Container(
       decoration: BoxDecoration(
-          color: Colors.grey.shade300, borderRadius: BorderRadius.circular(10)),
+          color: Colors.grey.shade200, borderRadius: BorderRadius.circular(10)),
       child: DropdownButtonFormField(
-        dropdownColor: Colors.grey.shade300,
+        dropdownColor: Colors.grey.shade200,
         iconSize: 35,
         
         validator: (value) {  
