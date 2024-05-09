@@ -12,8 +12,9 @@ class StringGenarator extends StatelessWidget {
         body: SingleChildScrollView(
           child: Container(
             margin: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.grey.shade200,
+              color: Colors.grey.shade50,
               borderRadius: BorderRadius.circular(30),
             ),
             child: Text(string,style: semiBoldBlack,),
