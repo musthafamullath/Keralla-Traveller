@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodie_fly/controller/blocs/signup/signup_bloc.dart';
+import 'package:foodie_fly/controller/api_sevices/sign_up_login/api_calling.dart';
+import 'package:foodie_fly/controller/blocs/sign_up/sign_up_bloc.dart';
 import 'package:foodie_fly/controller/cubits/toggle_password/toggle_password_cubit.dart';
 import 'package:foodie_fly/controller/cubits/toggle_repasswod/toggle_repassword_cubit.dart';
 import 'package:foodie_fly/model/user.dart';
@@ -34,8 +37,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: SingleChildScrollView(
+    return  SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.all(15),
@@ -165,26 +167,9 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                       },
                     ),
                     kHight10,
-                    BlocConsumer<SignupBloc, SignupState>(
-                      listener: (context, state) {
-                        if (state is SuccessState) {
-                          Navigator.of(context)
-                              .pushReplacement(MaterialPageRoute(
-                            builder: (context) => const ScreenOTP(),
-                          ));
-                          showSnack(context, kGreen, "verify otp to see home");
-                        } else if (state is FailedInvalidfields) {
-                          showSnack(context, amber, "failed. invalid fields");
-                        } else if (state is FailedToSignupUser) {
-                          showSnack(context, amber, "Pls Wait some times");
-                        } else if (state is FieldToParseBodyState) {
-                          showSnack(context, orange, "failed to parse body");
-                        } else if (state is ErrorState) {
-                          showSnack(context, red, "Error");
-                        }
-                      },
-                      builder: (context, state) {
-                        return ButtonWidget(
+                    // BlocBuilder(builder: (context, state) {
+                    //   return
+                       ButtonWidget(
                           width: size * 6 / 10,
                           height: size * 2.7 / 10,
                           text: 'Sign Up',
@@ -204,14 +189,67 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                                 password: password,
                                 rePassword: repassword,
                               );
-                              context
-                                  .read<SignupBloc>()
-                                  .add(SignupEvent(user: user));
+                              bool value = await ApiServices().signUp(user);
+                        if (value) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ScreenOTP(),
+                            ),
+                          );
+                        } else {}
+                              // context.read<SignUpBloc>().add(SignUpEvent(user: user, context: context));
+                             
                             }
                           },
-                        );
-                      },
-                    ),
+                        ),
+                    // },),
+                    // BlocConsumer<SignupBloc, SignupState>(
+                    //   listener: (context, state) {
+                    //     if (state is SuccessState) {
+                    //       Navigator.of(context)
+                    //           .pushReplacement(MaterialPageRoute(
+                    //         builder: (context) =>  ScreenOTP(),
+                    //       ));
+                    //       showSnack(context, kGreen, "verify otp to see home");
+                    //     } else if (state is FailedInvalidfields) {
+                    //       showSnack(context, amber, "failed. invalid fields");
+                    //     } else if (state is FailedToSignupUser) {
+                    //       showSnack(context, amber, "Pls Wait some times");
+                    //     } else if (state is FieldToParseBodyState) {
+                    //       showSnack(context, orange, "failed to parse body");
+                    //     } else if (state is ErrorState) {
+                    //       showSnack(context, red, "Error");
+                    //     }
+                    //   },
+                    //   builder: (context, state) {
+                    //     return ButtonWidget(
+                    //       width: size * 6 / 10,
+                    //       height: size * 2.7 / 10,
+                    //       text: 'Sign Up',
+                    //       onPressed: () async {
+                    //         if (formKey.currentState!.validate()) {
+                    //           final email = emailController.text;
+                    //           final fname = firstController.text;
+                    //           final lname = lastController.text;
+                    //           final phone = mobileController.text;
+                    //           final password = passwordController.text;
+                    //           final repassword = rePassController.text;
+                    //           final user = User(
+                    //             fName: fname,
+                    //             lName: lname,
+                    //             email: email,
+                    //             phone: phone,
+                    //             password: password,
+                    //             rePassword: repassword,
+                    //           );
+                    //           context
+                    //               .read<SignupBloc>()
+                    //               .add(SignupEvent(user: user));
+                    //         }
+                    //       },
+                    //     );
+                    //   },
+                    // ),
                     kHight10,
                     const DemoUser(),
                   ],
@@ -220,7 +258,6 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

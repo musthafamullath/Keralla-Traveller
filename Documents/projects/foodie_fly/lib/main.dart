@@ -13,7 +13,7 @@ import 'package:foodie_fly/controller/blocs/order/order_bloc.dart';
 import 'package:foodie_fly/controller/blocs/payment/payment_bloc.dart';
 import 'package:foodie_fly/controller/blocs/profile/profile_bloc.dart';
 import 'package:foodie_fly/controller/blocs/restaurant/restaurant_bloc.dart';
-import 'package:foodie_fly/controller/blocs/signup/signup_bloc.dart';
+import 'package:foodie_fly/controller/blocs/sign_up/sign_up_bloc.dart';
 import 'package:foodie_fly/controller/cubits/toggle_password/toggle_password_cubit.dart';
 import 'package:foodie_fly/controller/cubits/toggle_repasswod/toggle_repassword_cubit.dart';
 import 'package:foodie_fly/utils/constants.dart';
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => SignupBloc()),
+        BlocProvider(create: (context) => SignUpBloc()),
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => BottomNavigationBloc()),
         BlocProvider(create: (context) => TogglepasswordCubit()),

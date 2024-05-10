@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:foodie_fly/utils/constants.dart';
 import 'package:foodie_fly/view/screen/main/screen_main_page.dart';
@@ -16,6 +18,7 @@ class SplashScreenPage extends StatefulWidget {
 class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   void initState() {
+    // checkUserOnBoarding();
     checkUserLogin(context);
     super.initState();
   }

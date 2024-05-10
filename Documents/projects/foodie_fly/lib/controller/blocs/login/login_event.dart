@@ -1,11 +1,10 @@
 part of 'login_bloc.dart';
 
-@immutable
-sealed class LoginEvent {}
-class SellerLoginEvent extends LoginEvent{
-  final String email;
-  final String password;
 
-  SellerLoginEvent({required this.email, required this.password});
-
+class LoginEvent {
+  String email;
+  String password;
+  BuildContext context;
+  LoginEvent(
+      {required this.email, required this.password, required this.context});
 }
