@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:foodie_fly_restaurant/utils/constants.dart';
 
-class SplashComponeses extends StatelessWidget {
+class SplashComponeses extends StatefulWidget {
   const SplashComponeses({
     super.key,
   });
 
+  @override
+  State<SplashComponeses> createState() => _SplashComponesesState();
+}
+
+class _SplashComponesesState extends State<SplashComponeses> {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
