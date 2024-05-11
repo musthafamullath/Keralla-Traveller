@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodie_fly/controller/blocs/restaurant/restaurant_bloc.dart';
 import 'package:foodie_fly/model/offer.dart';
@@ -51,16 +53,37 @@ class ScreenOffer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Container(
-                    height: height * .200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      
-                      image: DecorationImage(
-                        image: NetworkImage(offers[index].image),
-                        fit: BoxFit.fill,
+                  Stack(
+                    children: [
+                     
+                      Container(
+                        height: height * .200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          
+                          image: DecorationImage(
+                            image: NetworkImage(offers[index].image),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
-                    ),
+                        Positioned(
+                          right: 7.5,
+                          top: 7.5,
+                          child: CircleAvatar(
+                            radius: 20,
+                            backgroundColor: Colors.grey.shade300,
+                            child: CircleAvatar(
+                              radius: 19,
+                              backgroundColor: Colors.grey.withOpacity(0.1),
+                              child: Text(
+                                '${offers[index].offerPercentage.toString()}%',
+                                style: regularGreen,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   kHight20,
                   Padding(
@@ -107,18 +130,18 @@ class ScreenOffer extends StatelessWidget {
                           ],
                         ),
                         const Spacer(),
-                        CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.grey.shade300,
-                          child: CircleAvatar(
-                            radius: 19,
-                            backgroundColor: white,
-                            child: Text(
-                              '${offers[index].offerPercentage.toString()}%',
-                              style: regularGreen,
-                            ),
-                          ),
-                        )
+                        // CircleAvatar(
+                        //   radius: 20,
+                        //   backgroundColor: Colors.grey.shade300,
+                        //   child: CircleAvatar(
+                        //     radius: 19,
+                        //     backgroundColor: white,
+                        //     child: Text(
+                        //       '${offers[index].offerPercentage.toString()}%',
+                        //       style: regularGreen,
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                   )

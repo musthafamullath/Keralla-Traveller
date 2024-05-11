@@ -70,6 +70,7 @@ class _ScreenAddAddressState extends State<ScreenAddAddress> {
                 TextFieldWidget(
                   userController: nameController,
                   label: 'Name:',
+                  hintText: ' eg : musthafa',
                   inputType: TextInputType.name,
                   obscureText: false,
                   validator: (value) {
@@ -83,6 +84,7 @@ class _ScreenAddAddressState extends State<ScreenAddAddress> {
                 TextFieldWidget(
                   userController: houseNameController,
                   label: 'House Name:',
+                  hintText: ' eg : mullath',
                   inputType: TextInputType.name,
                   obscureText: false,
                   validator: (value) {
@@ -96,6 +98,7 @@ class _ScreenAddAddressState extends State<ScreenAddAddress> {
                 TextFieldWidget(
                   userController: streetController,
                   label: 'Street:',
+                  hintText: ' eg : kalad',
                   inputType: TextInputType.name,
                   obscureText: false,
                   validator: (value) {
@@ -109,6 +112,7 @@ class _ScreenAddAddressState extends State<ScreenAddAddress> {
                 TextFieldWidget(
                   userController: pinodeController,
                   label: 'Pin code:',
+                  hintText: ' eg : 676109',
                   inputType: TextInputType.number,
                   obscureText: false,
                   validator: (value) {
@@ -122,7 +126,8 @@ class _ScreenAddAddressState extends State<ScreenAddAddress> {
                 TextFieldWidget(
                   userController: mobileController,
                   label: 'Mobile Number:',
-                  inputType: TextInputType.number,
+                  hintText: ' type with coundry code ( eg: +91 )',
+                  inputType: TextInputType.text,
                   obscureText: false,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -135,6 +140,7 @@ class _ScreenAddAddressState extends State<ScreenAddAddress> {
                 TextFieldWidget(
                   userController: stateController,
                   label: 'State:',
+                  hintText: ' eg : kerala',
                   inputType: TextInputType.name,
                   obscureText: false,
                   validator: (value) {
@@ -148,6 +154,7 @@ class _ScreenAddAddressState extends State<ScreenAddAddress> {
                 TextFieldWidget(
                   userController: districtController,
                   label: 'District:',
+                  hintText: ' eg : malappuram',
                   inputType: TextInputType.name,
                   obscureText: false,
                   validator: (value) {
