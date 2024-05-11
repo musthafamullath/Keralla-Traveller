@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:foodie_fly_restaurant/controllers/api_end_points/api_end_points.dart';
@@ -11,18 +13,7 @@ class DishApiServices {
   Future<bool> addDish(Dish dish) async {
     final bearer = await getToken();
     try {
-      // print(dish.categoryId);
-      // print(dish.description);
-      // print(dish.dishId);
-      // print(dish.image);
-      // print(dish.isAvailable);
-      // print(dish.isVeg);
-      // print(dish.name);
-      // print(dish.price);
-      // print(dish.quantity);
-      // print(dish.sellerId);
       final body = FormData.fromMap(dish.toJson(dish));
-      // print('👀${body.files}');
       final response = await dio.post(
         ApiEndPoints.addDish,
         options: Options(
@@ -34,8 +25,6 @@ class DishApiServices {
         ),
         data: body,
       );
-      // print('❤️${response}');
-      // print('😂${response}');
       if (response.statusCode == 200) {
         return true;
       } else {
@@ -45,7 +34,6 @@ class DishApiServices {
       log("DioException: ${e.message} is the exception");
       return false;
     } catch (e) {
-      // print("Error: $e");
       log("🎉${e.toString()}");
       return false;
     }
@@ -55,8 +43,6 @@ class DishApiServices {
   Future<List<DishModel>> fetchDishesbyCategory(int categoryId) async {
     final bearer = await getToken();
     log('CATEGORYID${ApiEndPoints.baseUrl}${ApiEndPoints.getDishesByCategory}$categoryId 🤝');
-
-    // print("👇");
     try {
       final response = await dio.get(
         '${ApiEndPoints.getDishesByCategory}$categoryId',
@@ -68,24 +54,14 @@ class DishApiServices {
           },
         ),
       );
-
       if (response.statusCode == 200) {
-        // print(response);
-        // print("-------👀----");
-        // print(response.statusCode);
-
         final Map<String, dynamic> data = response.data;
-
         final result = data['dishList'] as List;
-
         List<DishModel> dishes = [];
-
         for (int i = 0; i < result.length; i++) {
           final dish = DishModel.fromJson(result[i]);
-
           dishes.add(dish);
         }
-
         return dishes;
       } else {
         return [];
@@ -100,9 +76,8 @@ class DishApiServices {
   }
 
 //--------------------------DELETE DISH ------------------------------//
-  Future<bool> deleteDish(int dishId) async {
+   Future<void> deleteDish(int dishId) async {
     final token = await getToken();
-
     final response = await dio.delete(
       '${ApiEndPoints.deleteOrUpdateDish}$dishId',
       options: Options(headers: {
@@ -111,18 +86,7 @@ class DishApiServices {
         'Authorization': 'Bearer $token',
       }),
     );
-    // print("🍿${response.statusCode}");
-    // print(response);
-    try {
-      if (response.statusCode == 200) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      // print(e.toString());
-      return false;
-    }
+    print(response.statusCode);
   }
 
 //--------------------------UPDATE DISH-------------------------------//
@@ -131,8 +95,7 @@ class DishApiServices {
       final token = await getToken();
       final response = await dio.put(
         '${ApiEndPoints.deleteOrUpdateDish}${dishModel.dishId}',
-        data: FormData.fromMap(dishModel.toJson(dishModel)),
-        
+        data: FormData.fromMap(dishModel.toJson(dishModel)),   
         options: Options(
           headers: {
             'Content-Type': 'application/json',
@@ -141,17 +104,13 @@ class DishApiServices {
           },
         ),
       );
-      // print(response.data.toString());
       if (response.statusCode == 200) {
-        // print('status 200');
         return true;
       } else {
         return false;
       }
     } catch (e) {
       log("🎉${e.toString()}");
-      // print('not edited');
-      // print(e.toString());
       return false;
     }
   }

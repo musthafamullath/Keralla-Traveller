@@ -38,11 +38,11 @@ For the purposes of this Privacy Policy:
     more of the shares, equity interest or other securities entitled to vote
     for election of directors or other managing authority.
 
-  * Application refers to Foodie Fly Restaurant, the software program provided
+  * Application refers to Fork Plate Restaurant, the software program provided
     by the Company.
 
   * Company (referred to as either "the Company", "We", "Us" or "Our" in this
-    Agreement) refers to Foodie Fly Restaurant.
+    Agreement) refers to Fork Plate Restaurant.
 
   * Country refers to: Kerala, India
 
@@ -335,7 +335,7 @@ If you have any questions about this Privacy Policy, You can contact us:
 String termsAndContitions = 
 '''
 Terms & Conditions
-These terms and conditions applies to the Foodie Fly Restaurant app (hereby referred to as "Application") for mobile devices that was created by Mohammed Musthafa M (hereby referred to as "Service Provider") as a Free service.
+These terms and conditions applies to the Fork Plate Restaurant app (hereby referred to as "Application") for mobile devices that was created by Mohammed Musthafa M (hereby referred to as "Service Provider") as a Free service.
 
 
 Upon downloading or utilizing the Application, you are automatically agreeing to the following terms. It is strongly advised that you thoroughly read and understand these terms prior to using the Application. Unauthorized copying, modification of the Application, any part of the Application, or our trademarks is strictly prohibited. Any attempts to extract the source code of the Application, translate the Application into other languages, or create derivative versions are not permitted. All trademarks, copyrights, database rights, and other intellectual property rights related to the Application remain the property of the Service Provider.
@@ -381,21 +381,21 @@ String aboutUs =
 '''
 About Us
 
-Welcome to Foodie Fly Restaurant – Your Culinary Destination!
+Welcome to Fork Plate Restaurant – Your Culinary Destination!
 
-At Foodie Fly Restaurant, we're passionate about bringing together food enthusiasts and sellers to create a dynamic marketplace of flavors. Our platform is designed to empower sellers to showcase their culinary creations, connect with hungry customers, and manage their operations with ease. Whether you're a seasoned chef or a home cook with a knack for delicious dishes, Foodie Fly Restaurant is your gateway to culinary success.
+At Fork Plate Restaurant, we're passionate about bringing together food enthusiasts and sellers to create a dynamic marketplace of flavors. Our platform is designed to empower sellers to showcase their culinary creations, connect with hungry customers, and manage their operations with ease. Whether you're a seasoned chef or a home cook with a knack for delicious dishes, Fork Plate Restaurant is your gateway to culinary success.
 
 Our Story
 
-Foodie Fly Restaurant was born out of a simple yet powerful idea – to revolutionize the way people experience and enjoy food. Founded by a team of food lovers and tech enthusiasts, Foodie Fly Restaurant has grown into a vibrant community of sellers and foodies who share a common love for great food and seamless dining experiences. From gourmet chefs to local eateries, our platform welcomes sellers of all backgrounds to share their passion for food with the world.
+Fork Plate Restaurant was born out of a simple yet powerful idea – to revolutionize the way people experience and enjoy food. Founded by a team of food lovers and tech enthusiasts, Fork Plate Restaurant has grown into a vibrant community of sellers and foodies who share a common love for great food and seamless dining experiences. From gourmet chefs to local eateries, our platform welcomes sellers of all backgrounds to share their passion for food with the world.
 
 Our Vision
 
-At Foodie Fly Restaurant, we envision a world where everyone can indulge in their culinary cravings anytime, anywhere. Whether you're craving a gourmet meal or a comforting homemade dish, Foodie Fly Restaurant is here to satisfy your appetite. We're more than just a food seller app – we're a catalyst for culinary exploration, community engagement, and gastronomic delight. Our vision is to connect people through the universal language of food and create memorable dining experiences for all.
+At Fork Plate Restaurant, we envision a world where everyone can indulge in their culinary cravings anytime, anywhere. Whether you're craving a gourmet meal or a comforting homemade dish, Fork Plate Restaurant is here to satisfy your appetite. We're more than just a food seller app – we're a catalyst for culinary exploration, community engagement, and gastronomic delight. Our vision is to connect people through the universal language of food and create memorable dining experiences for all.
 
-Join Foodie Fly Restaurant Today!
+Join Fork Plate Restaurant Today!
 
-Join our vibrant community of food sellers and enthusiasts today! Download Foodie Fly Restaurant from the App Store or Google Play Store and embark on a culinary journey filled with flavor, excitement, and satisfaction. We can't wait to see what delicious creations you'll bring to the table!
+Join our vibrant community of food sellers and enthusiasts today! Download Fork Plate Restaurant from the App Store or Google Play Store and embark on a culinary journey filled with flavor, excitement, and satisfaction. We can't wait to see what delicious creations you'll bring to the table!
 ''';
 
 
@@ -404,7 +404,7 @@ String termsConditions =
 '''
 **Terms and Conditions**
 
-These terms and conditions apply to the Foodie Fly Restaurant app (referred to as "Application") for mobile devices, created by Foodie Fly Restaurant (referred to as "Service Provider"), provided as a Free service. By downloading or using the Application, you automatically agree to the following terms. It is strongly advised to thoroughly read and understand these terms before using the Application. Unauthorized copying or modification of the Application, any part of it, or our trademarks is strictly prohibited. Any attempts to extract the source code of the Application, translate it into other languages, or create derivative versions are not permitted. All trademarks, copyrights, database rights, and other intellectual property rights related to the Application remain the property of the Service Provider.
+These terms and conditions apply to the Fork Plate Restaurant app (referred to as "Application") for mobile devices, created by Fork Plate Restaurant (referred to as "Service Provider"), provided as a Free service. By downloading or using the Application, you automatically agree to the following terms. It is strongly advised to thoroughly read and understand these terms before using the Application. Unauthorized copying or modification of the Application, any part of it, or our trademarks is strictly prohibited. Any attempts to extract the source code of the Application, translate it into other languages, or create derivative versions are not permitted. All trademarks, copyrights, database rights, and other intellectual property rights related to the Application remain the property of the Service Provider.
 
 The Service Provider is dedicated to ensuring the Application is as beneficial and efficient as possible. As such, they reserve the right to modify the Application or charge for their services at any time and for any reason. The Service Provider assures you that any charges for the Application or its services will be clearly communicated to you.
 

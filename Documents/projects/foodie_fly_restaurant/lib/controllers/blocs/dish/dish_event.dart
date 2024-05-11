@@ -8,8 +8,8 @@ class AddVegEvent extends DishEvent {
 }
 
 class AddAvailableEvent extends DishEvent {
-  bool isAvail;
-  AddAvailableEvent({required this.isAvail});
+  bool isAvailable;
+  AddAvailableEvent({required this.isAvailable});
 }
 
 class AddCategoryEvent extends DishEvent {
@@ -26,17 +26,10 @@ class AddNewDishEvent extends DishEvent {
 class GetDishesByCategoryEvent extends DishEvent {
   final int categoryId;
   GetDishesByCategoryEvent({required this.categoryId});
-  
 }
 
 class UpdateDishEvent extends DishEvent {
   final DishModel dishModel;
   final BuildContext context;
   UpdateDishEvent({required this.dishModel, required this.context});
-}
-
-class DeleteDishEvent extends DishEvent{
-  final DishModel dishModel;
-  final BuildContext context;
-  DeleteDishEvent({required this.dishModel, required this.context});
 }

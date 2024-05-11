@@ -19,7 +19,7 @@ class ScreenLoginRestration extends StatelessWidget {
             title: const Padding(
               padding: EdgeInsets.only(top: 20),
               child: Text(
-                "Foodie Fly Restaurent",
+                "Fork Plate Restaurant",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,

@@ -44,7 +44,7 @@ class DishTrailingOparations extends StatelessWidget {
                               ScreenAddDishes(
                             categories:
                                 categories,
-                            dishModel: state
+                            dish: state
                                     is GetDishesByCategoryState
                                 ? state
                                     .dishes[index]
@@ -95,10 +95,10 @@ class DishTrailingOparations extends StatelessWidget {
                                               ? TextButton(
                                                   child: const Text('Delete'),
                                                   onPressed: () async {
-                                                    await DishApiServices().deleteDish(state.dishes[index].dishId!).then(
+                                                    await DishApiServices().deleteDish(state.dishes[index].dishId).then(
                                                           (value) => context.read<DishBloc>().add(
                                                                 GetDishesByCategoryEvent(
-                                                                  categoryId: category.id!,
+                                                                  categoryId: category.id,
                                                                 ),
                                                               ),
                                                         );

@@ -1,28 +1,28 @@
 import 'package:dio/dio.dart';
 
 class DishModel {
-  final int? dishId;
-  final int? sellerId;
-  final String? name;
-  final String? description;
-  final num? price;
-  final String? image;
-  final int? quantity;
-  final int? categoryId;
-  final bool? isVeg;
-  final bool? isAvailable;
+  final int dishId;
+  final int sellerId;
+  final String name;
+  final String description;
+  final num price;
+  final String image;
+  final int quantity;
+  final int categoryId;
+  final bool isVeg;
+  final bool isAvailable;
 
   DishModel({
-     this.dishId,
-     this.sellerId,
-     this.name,
-     this.description,
-     this.price,
-     this.image,
-     this.quantity,
-     this.categoryId,
-     this.isVeg,
-     this.isAvailable,
+    required this.dishId,
+    required this.sellerId,
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.image,
+    required this.quantity,
+    required this.categoryId,
+    required this.isVeg,
+    required this.isAvailable,
   });
     factory DishModel.fromJson(Map<String, dynamic> json) {
       // print(json);
@@ -56,28 +56,28 @@ class DishModel {
 }
 
 class Dish {
-  final int? dishId;
-  final int? sellerId;
-  final String? name;
-  final String? description;
-  final int? price;
-  final MultipartFile? image;
-  final int? quantity;
-  final int? categoryId;
-  final bool? isVeg;
-  final bool? isAvailable;
+  final int dishId;
+  final int sellerId;
+  final String name;
+  final String description;
+  final int price;
+  final MultipartFile image;
+  final int quantity;
+  final int categoryId;
+  final bool isVeg;
+  final bool isAvailable;
 
   Dish({
-     this.dishId,
-     this.sellerId,
-     this.name,
-     this.description,
-     this.price,
-     this.image,
-     this.quantity,
-     this.categoryId,
-     this.isVeg,
-     this.isAvailable,
+    required this.dishId,
+    required this.sellerId,
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.image,
+    required this.quantity,
+    required this.categoryId,
+    required this.isVeg,
+    required this.isAvailable,
   });
 
   factory Dish.fromJson(Map<String, dynamic> json) {

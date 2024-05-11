@@ -26,7 +26,7 @@ class DropDownWidget extends StatelessWidget {
     category = dish != null
         ? categories
             .firstWhere((element) => element.id == dish!.categoryId)
-            .name!
+            .name
         : '';
     return Container(
       decoration: BoxDecoration(
@@ -49,7 +49,7 @@ class DropDownWidget extends StatelessWidget {
         items: categories.map((cat) {
           return DropdownMenuItem(
             value: cat,
-            child: Text(cat.name!),
+            child: Text(cat.name),
           );
         }).toList(),
         onChanged: (value) async {
@@ -57,7 +57,7 @@ class DropDownWidget extends StatelessWidget {
 
           context.read<DishBloc>().add(
                 AddCategoryEvent(
-                  categoryId: value!.id!,
+                  categoryId: value!.id,
                 ),
               );
         },

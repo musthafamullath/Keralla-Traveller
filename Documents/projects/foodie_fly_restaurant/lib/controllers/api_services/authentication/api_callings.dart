@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ApiSellerAuthentication {
   final Dio dio = Dio(BaseOptions(baseUrl: ApiEndPoints.baseUrl));
   //----------------------------------------------------------sign up----------------------------------------------------------//
-  Future<String> register(
+  Future<bool> register(
       RestaurantRegisteration restaurantRegisteration) async {
     final data = {
       "email": restaurantRegisteration.email,
@@ -20,7 +20,6 @@ class ApiSellerAuthentication {
       "description": restaurantRegisteration.description,
       "pinCode": restaurantRegisteration.pinCode,
     };
-    // print(data);
     try {
       final response = await dio.post(
         ApiEndPoints.sellerRegister,
@@ -33,75 +32,44 @@ class ApiSellerAuthentication {
         data: jsonEncode(data),
       );
       debugPrint('Response ${response.statusCode}');
-      // print(response);
-
       final responseBody = response.data ;
-      // print(responseBody);
       if (response.statusCode == 200) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setBool('LOGIN', true);
         saveToken(responseBody['token']);
-        return "Success";
-      } else if (response.statusCode == 400) {
-        if (responseBody['message'] == "failed. invalid fields") {
-          return "failed. invalid fields";
-        } else if (responseBody['message'] == "failed to register") {
-          return "failed to register";
-        }
-        return '';
-      } else if (response.statusCode == 500) {
-        return "failed to parse body";
+        return true;
       } else {
-        return '';
+        return false;
       }
-    } catch (e) {
-      log("🎉${e.toString()}");
-      return '';
+   } catch (e) {
+      log(e.toString());
+      return false;
     }
   }
 
   //----------------------------------------------------------login----------------------------------------------------------//
 
-   Future<String> login(String email, String password) async {
+   Future<bool> login(String email, String password) async {
     try {
-
       final data = {
         "email": email,
         "password": password,
       };
-      // print('😍${data}');
-
       final response = await dio.post(
         ApiEndPoints.sellerLogin,
         data: data,
       );
-      // print('🤝${response.statusCode}');
-      // print('😊${response.data}');
-
       final responseBody = response.data;
-
       if (response.statusCode == 200) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setBool("LOGIN", true);
         saveToken(responseBody['token']);
-        // print('🎉${response}');
-        return "success";
-      } else if (response.statusCode == 400) {
-        if (responseBody['message'] == "failed. invalid fields") {
-          return "failed. invalid fields";
-        } else if (responseBody['message'] == "failed to Login") {
-          return "failed to Login";
-        }
-        return '';
-      } else if (response.statusCode == 500) {
-        return "failed to parse body";
-      } else {
-        return '';
+        return true;
       }
+      return false;
     } catch (e) {
       log("👇${e.toString()}");
-      // print('------');
-      return '';
+      return false;
     }
   }
 }

@@ -1,8 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodie_fly_restaurant/controllers/blocs/login/login_bloc.dart';
+import 'package:foodie_fly_restaurant/controllers/api_services/authentication/api_callings.dart';
 import 'package:foodie_fly_restaurant/views/screens/main/screen_main_page.dart';
-import 'package:foodie_fly_restaurant/views/widgets/class_widgets/demo_user.dart';
 import 'package:foodie_fly_restaurant/views/widgets/function_widgets/toggle_password_function.dart';
 
 import '../../../../controllers/cubits/toggle_password/toggle_password_cubit.dart';
@@ -20,10 +21,9 @@ class ScreenLoginPage extends StatefulWidget {
 }
 
 class _ScreenLoginPageState extends State<ScreenLoginPage> {
+
   final formKey = GlobalKey<FormState>();
-
   final userController = TextEditingController();
-
   final passwordController = TextEditingController();
 
   @override
@@ -44,31 +44,32 @@ class _ScreenLoginPageState extends State<ScreenLoginPage> {
                 color: grey.withOpacity(0.5),
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                kHight30,
-                const Text(
-                  "Welcome",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  kHight30,
+                  const Text(
+                    "Welcome",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                const Text(
-                  "Login to your account",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                ),
-                kHight30,
-                Form(
-                  key: formKey,
-                  child: Column(
+                  const Text(
+                    "Login to your account",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                  kHight30,
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       TextFieldWidget(
                         userController: userController,
                         label: 'Email-address:',
+                        hinttext: 'eg : musthafa@gmail.com',
                         inputType: TextInputType.emailAddress,
                         obscureText: false,
                         validator: (value) {
@@ -85,6 +86,7 @@ class _ScreenLoginPageState extends State<ScreenLoginPage> {
                           return TextFieldWidget(
                             userController: passwordController,
                             label: 'Password:',
+                            hinttext: 'eg : Musthafa@123',
                             inputType: TextInputType.name,
                             obscureText: state,
                             suffixIcon: togglePassword(),
@@ -106,48 +108,61 @@ class _ScreenLoginPageState extends State<ScreenLoginPage> {
                         },
                       ),
                       kHight30,
-                      BlocConsumer<LoginBloc, LoginState>(
-                        listener: (context, state) {
-                          if (state is SellerLoginSuccessState) {
-                            Navigator.of(context)
-                                .pushReplacement(MaterialPageRoute(
-                              builder: (context) => ScreenMainPage(),
-                            ));
-                            showSnack(context, green, "successfully signed up");
-                          } else if (state is SellerLoginFailedInvalidFields) {
-                            showSnack(context, amber, "failed invalid fields");
-                          } else if (state is SellerLoginFailedToLogin) {
-                            showSnack(context, amber, "failed to register");
-                          } else if (state
-                              is SellerLoginFieldToParseBodyState) {
-                            showSnack(context, orange, "failed to parse body");
-                          } else if (state is SellerLoginErrorState) {
-                            showSnack(context, red, "Error");
-                          }
-                        },
-                        builder: (context, state) {
-                          return ButtonWidget(
+                      // BlocConsumer<LoginBloc, LoginState>(
+                      //   listener: (context, state) {
+                      //     if (state is SellerLoginSuccessState) {
+                      //       Navigator.of(context)
+                      //           .pushReplacement(MaterialPageRoute(
+                      //         builder: (context) => ScreenMainPage(),
+                      //       ));
+                      //       showSnack(context, green, "successfully signed up");
+                      //     } else if (state is SellerLoginFailedInvalidFields) {
+                      //       showSnack(context, amber, "failed invalid fields");
+                      //     } else if (state is SellerLoginFailedToLogin) {
+                      //       showSnack(context, amber, "failed to register");
+                      //     } else if (state
+                      //         is SellerLoginFieldToParseBodyState) {
+                      //       showSnack(context, orange, "failed to parse body");
+                      //     } else if (state is SellerLoginErrorState) {
+                      //       showSnack(context, red, "Error");
+                      //     }
+                      //   },
+                        // builder: (context, state) {
+                          // return
+                           ButtonWidget(
                             width: size * 6 / 10,
                             text: 'Login',
                             onPressed: () async {
                               if (formKey.currentState!.validate()) {
                                 final email = userController.text;
                                 final password = passwordController.text;
-                                context.read<LoginBloc>().add(SellerLoginEvent(
-                                    email: email, password: password));
+                                 final value =
+                            await ApiSellerAuthentication().login(email, password);
+                            if (value) {
+                          showSnack(
+                              context, Colors.green, 'Logged Successfully');
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => ScreenMainPage()));
+                        } else {
+                          showSnack(context, Colors.red, 'Invalid entries');
+                        }
+                                // context.read<LoginBloc>().add(SellerLoginEvent(
+                                //     email: email, password: password));
                               }
                             },
                             height: size * 2.7 / 10,
-                          );
-                        },
-                      ),
+                          ),
+                          // ;
+                        // },
+                      // ),
                       kHight50,
-                      const DemoUser(),
+                      // const DemoUser(),
                     ],
                   ),
-                ),
-                kHight30,
-              ],
+                  kHight30,
+                ],
+              ),
             ),
           ),
         ),

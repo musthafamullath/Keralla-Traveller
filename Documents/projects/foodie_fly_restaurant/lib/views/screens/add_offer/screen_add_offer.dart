@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'dart:io';
 
@@ -6,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodie_fly_restaurant/controllers/blocs/category/category_bloc.dart';
 import 'package:foodie_fly_restaurant/controllers/blocs/offer/offer_bloc.dart';
+import 'package:foodie_fly_restaurant/models/category.dart';
 import 'package:foodie_fly_restaurant/models/offer.dart';
 import 'package:foodie_fly_restaurant/utils/constants.dart';
 import 'package:foodie_fly_restaurant/utils/text_styles.dart';
@@ -16,25 +19,15 @@ import 'package:foodie_fly_restaurant/views/widgets/class_widgets/text_field_wid
 import 'package:foodie_fly_restaurant/views/widgets/function_widgets/snackbar_function.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ScreenAddOffer extends StatefulWidget {
-  const ScreenAddOffer({super.key});
+class ScreenAddOffer extends StatelessWidget {
+ScreenAddOffer({super.key});
 
-  @override
-  State<ScreenAddOffer> createState() => _ScreenAddOfferState();
-}
-
-class _ScreenAddOfferState extends State<ScreenAddOffer> {
   final formkey = GlobalKey<FormState>();
   final offerController = TextEditingController();
-
   final offerPerController = TextEditingController();
-
-
-
+  final List<Category> categories = [];
   int categoryId = 0;
-
   XFile? imagePath;
-
   String image = '';
 
   @override
@@ -58,7 +51,6 @@ class _ScreenAddOfferState extends State<ScreenAddOffer> {
                     imagePath = await showBottomSheetWidget(context);
                     if (imagePath != null) {
                       image = imagePath!.path;
-                      
                     }
                   },
                   child: Container(
@@ -111,18 +103,18 @@ class _ScreenAddOfferState extends State<ScreenAddOffer> {
                           return null;
                         },
                         decoration: InputDecoration(
-                            label: Text(state.categories[0].name!),
+                            label: Text(state.categories[0].name),
                             contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 18, vertical: 10),
                             border: InputBorder.none),
                         items: state.categories.map((cat) {
                           return DropdownMenuItem(
                             value: cat,
-                            child: Text(cat.name!),
+                            child: Text(cat.name),
                           );
                         }).toList(),
                         onChanged: (value) async {
-                          categoryId = value!.id!;
+                          categoryId = value!.id;
                           log(categoryId.toString());
                         },
                       ),
@@ -141,35 +133,36 @@ class _ScreenAddOfferState extends State<ScreenAddOffer> {
                   },
                 ),
                 kHight30,
-                BlocConsumer<OfferBloc, OfferState>(
-                  listener: (context, state) {
-                    if (state is AddOfferSuccessState) {
-                      showSnack(context, green, 'offer created successfully');
-                    } else if (state is AddOfferInvalidInputs) {
-                      showSnack(context, amber, "invalid inputs");
-                    } else if (state is AddOfferFailedToGetImageFromForm) {
-                      showSnack(
-                          context, orange, "failed to get image from form");
-                    } else if (state is AddOfferFailedToParseBody) {
-                      showSnack(context, orange, "failed to parse body");
-                    } else if (state is AddOfferFailedToOpenFilePathInServer) {
-                      showSnack(
-                          context, amber, "failed to open file path in server");
-                    } else if (state is AddOfferFailedToUploadFileToCloud) {
-                      showSnack(
-                          context, amber, "failed to upload file to cloud");
-                    } else if (state is AddOfferFailedToDeleteTempImage) {
-                      showSnack(context, amber, "failed to delete temp image");
-                    } else if (state
-                        is AddOfferErrorOccuredWhileCreatingOffer) {
-                      showSnack(context, orange,
-                          "error occured while creating offer");
-                    } else {
+                // BlocConsumer<OfferBloc, OfferState>(
+                //   listener: (context, state) {
+                //     if (state is AddOfferSuccessState) {
+                //       showSnack(context, green, 'offer created successfully');
+                //     } else if (state is AddOfferInvalidInputs) {
+                //       showSnack(context, amber, "invalid inputs");
+                //     } else if (state is AddOfferFailedToGetImageFromForm) {
+                //       showSnack(
+                //           context, orange, "failed to get image from form");
+                //     } else if (state is AddOfferFailedToParseBody) {
+                //       showSnack(context, orange, "failed to parse body");
+                //     } else if (state is AddOfferFailedToOpenFilePathInServer) {
+                //       showSnack(
+                //           context, amber, "failed to open file path in server");
+                //     } else if (state is AddOfferFailedToUploadFileToCloud) {
+                //       showSnack(
+                //           context, amber, "failed to upload file to cloud");
+                //     } else if (state is AddOfferFailedToDeleteTempImage) {
+                //       showSnack(context, amber, "failed to delete temp image");
+                //     } else if (state
+                //         is AddOfferErrorOccuredWhileCreatingOffer) {
+                //       showSnack(context, orange,
+                //           "error occured while creating offer");
+                //     } else {
                       
-                    }
-                  },
-                  builder: (context, state) {
-                    return ButtonWidget(
+                //     }
+                //   },
+                //   builder: (context, state) {
+                //     return
+                     ButtonWidget(
                       width: width,
                       text: 'ADD OFFER',
                       onPressed: () async {
@@ -182,22 +175,22 @@ class _ScreenAddOfferState extends State<ScreenAddOffer> {
                             final offer = OfferRequest(
                               image: imageFile,
                               categoryId: categoryId,
-
                               offerTitle: offerController.text,
                               offerPercentage:  int.parse(offerPerController.text),
                               status: 'ACTIVE',
                             );
-                            // ignore: use_build_context_synchronously
-                            context.read<OfferBloc>().add(AddOfferEvent(
-                                  offerRequest: offer,
-                                ));
+                            context
+                            .read<OfferBloc>()
+                            .add(AddOfferEvent(offer: offer, context: context));
+                            // context.read<OfferBloc>().add(AddOfferEvent(
+                            //       offerRequest: offer,
+                            //     ));
                           }
                         }
                       },
                       height: height * 1.5 / 10,
-                    );
-                  },
-                ),
+                    ),
+                 
               ],
             ),
           ),

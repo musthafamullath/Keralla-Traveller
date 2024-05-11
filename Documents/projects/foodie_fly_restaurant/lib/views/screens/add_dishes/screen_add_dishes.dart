@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodie_fly_restaurant/controllers/api_tokens/tokens.dart';
 import 'package:foodie_fly_restaurant/controllers/blocs/dish/dish_bloc.dart';
 import 'package:foodie_fly_restaurant/models/category.dart';
 import 'package:foodie_fly_restaurant/models/dish.dart';
@@ -29,10 +28,10 @@ class ScreenAddDishes extends StatefulWidget {
   ScreenAddDishes(
       {super.key,
       required this.categories,
-      this.dishModel,
+      this.dish,
       required this.operatior});
   Operatior operatior;
-  DishModel? dishModel;
+  DishModel? dish;
   final List<Category> categories;
 
   @override
@@ -41,39 +40,26 @@ class ScreenAddDishes extends StatefulWidget {
 
 class _ScreenAddDishesState extends State<ScreenAddDishes> {
   initTextControllers() {
-    if (widget.dishModel != null) {
-      dishController.text = widget.dishModel!.name!;
-      descriptionController.text = widget.dishModel!.description!;
-      priceController.text = widget.dishModel!.price.toString();
-      quantityController.text = widget.dishModel!.quantity.toString();
-      isVeg = widget.dishModel!.isVeg!;
-      isAvailable = widget.dishModel!.isAvailable!;
-      image = widget.dishModel!.image!;
-      categoryId = widget.dishModel!.categoryId!;
-      sellerId = widget.dishModel!.sellerId!;
+    if (widget.dish != null) {
+      dishController.text = widget.dish!.name;
+      descriptionController.text = widget.dish!.description;
+      priceController.text = widget.dish!.price.toString();
+      quantityController.text = widget.dish!.quantity.toString();
+      isVeg = widget.dish!.isVeg;
+      isAvailable = widget.dish!.isAvailable;
+      image = widget.dish!.image;
     }
   }
 
   final formKey = GlobalKey<FormState>();
-
   final dishController = TextEditingController();
-
   final descriptionController = TextEditingController();
-
   final priceController = TextEditingController();
-
   final quantityController = TextEditingController();
-
   bool isVeg = false;
-
   bool isAvailable = false;
-
   int categoryId = 0;
-
-  int sellerId = 0;
-
   XFile? imagePath;
-
   String image = '';
   @override
   void initState() {
@@ -98,26 +84,10 @@ class _ScreenAddDishesState extends State<ScreenAddDishes> {
       ),
       body: BlocBuilder<DishBloc, DishState>(
         builder: (context, state) {
-          return state is AddNewDishState
+          if (state is AddNewDishState) {}
+          return state is AddNewDishState && state.isLoading
               ? const Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(),
-                      kHight10,
-                      Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Text(
-                          "pls wait",
-                          style: TextStyle(
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: CircularProgressIndicator()
                 )
               : SingleChildScrollView(
                   child: Padding(
@@ -199,7 +169,7 @@ class _ScreenAddDishesState extends State<ScreenAddDishes> {
                           TextFieldWidget(
                             userController: priceController,
                             label: 'Price: ',
-                            inputType: TextInputType.name,
+                            inputType: TextInputType.number,
                             obscureText: false,
                             validator: (value) {
                               if (value!.isEmpty) return 'Enter the price';
@@ -210,7 +180,7 @@ class _ScreenAddDishesState extends State<ScreenAddDishes> {
                           TextFieldWidget(
                             userController: quantityController,
                             label: 'Quantity: ',
-                            inputType: TextInputType.name,
+                            inputType: TextInputType.number,
                             obscureText: false,
                             validator: (value) {
                               if (value!.isEmpty) return 'Enter the quantity';
@@ -231,7 +201,8 @@ class _ScreenAddDishesState extends State<ScreenAddDishes> {
                                 operation: widget.operatior,
                                 dish: widget.operatior == Operatior.add
                                     ? null
-                                    : widget.dishModel,
+                                    : widget.dish,
+                                    
                               );
                             },
                           ),
@@ -286,7 +257,7 @@ class _ScreenAddDishesState extends State<ScreenAddDishes> {
                                         : isAvailable,
                                     onChanged: (value) {
                                       context.read<DishBloc>().add(
-                                            AddAvailableEvent(isAvail: value),
+                                            AddAvailableEvent(isAvailable: value),
                                           );
                                       isAvailable = value;
                                     },
@@ -309,13 +280,12 @@ class _ScreenAddDishesState extends State<ScreenAddDishes> {
                                       context, amber, 'Image is mandatory');
                                 } else {
                                   if (widget.operatior == Operatior.add) {
-                                    int sellerId = await getSellerId();
 
                                     MultipartFile imageFile =
                                         await MultipartFile.fromFile(image);
                                     Dish dish = Dish(
                                       dishId: 0,
-                                      sellerId: sellerId,
+                                      sellerId: 0,
                                       name: dishController.text,
                                       description: descriptionController.text,
                                       price: int.parse(priceController.text),
@@ -326,23 +296,20 @@ class _ScreenAddDishesState extends State<ScreenAddDishes> {
                                       isVeg: isVeg,
                                       isAvailable: isAvailable,
                                     );
-                                    
                                     context.read<DishBloc>().add(
-                                        
                                         AddNewDishEvent(
-                                            
                                             dish: dish,
                                             context: context));
                                   } else {
                                     DishModel dishModel = DishModel(
-                                      dishId: widget.dishModel!.dishId!,
-                                      sellerId: sellerId,
+                                      dishId: widget.dish!.dishId,
+                                      sellerId: 0,
                                       name: dishController.text,
                                       description: descriptionController.text,
                                       price: int.parse(priceController.text),
                                       image: image != ''
                                           ? image
-                                          : widget.dishModel!.image,
+                                          : widget.dish!.image,
                                       quantity:
                                           int.parse(quantityController.text),
                                       categoryId: categoryId,

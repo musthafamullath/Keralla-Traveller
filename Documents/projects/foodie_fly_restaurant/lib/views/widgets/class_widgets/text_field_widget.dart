@@ -9,6 +9,7 @@ class TextFieldWidget extends StatelessWidget {
     this.inputType,
     this.obscureText,
     this.suffixIcon,
+    this.hinttext,
   });
   final TextEditingController? userController;
   final String? label;
@@ -16,6 +17,7 @@ class TextFieldWidget extends StatelessWidget {
   final bool? obscureText;
   final String? Function(String?) validator;
   final Widget? suffixIcon;
+  final String? hinttext;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,9 @@ class TextFieldWidget extends StatelessWidget {
         validator: validator,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
-          label: Text(label!),
+          labelText: label,
+          // label: Text(label!),
+          hintText: hinttext,
           suffixIcon: suffixIcon,
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 20,

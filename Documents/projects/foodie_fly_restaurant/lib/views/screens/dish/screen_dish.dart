@@ -16,7 +16,7 @@ class ScreenDish extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
         child: AppBarWidget(
-          title: dish!.name!,
+          title: dish!.name,
         ),
       ),
       body: Padding(
@@ -39,7 +39,7 @@ class ScreenDish extends StatelessWidget {
                             ? const AssetImage(
                                     'assets/images/categories/dish.jpg')
                                 as ImageProvider
-                            : NetworkImage(dish!.image!.toString()),
+                            : NetworkImage(dish!.image.toString()),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -48,7 +48,7 @@ class ScreenDish extends StatelessWidget {
                   width: width,
                   height: height,
                   decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
+                      color: Colors.grey.shade50,
                       borderRadius: BorderRadius.circular(20)),
                   child: Padding(
                     padding:
@@ -71,11 +71,11 @@ class ScreenDish extends StatelessWidget {
                             children: [
                               SectionHead(
                                 heading: "Item: ",
-                                values: dish!.name!,
+                                values: dish!.name,
                               ),
                               SectionHead(
                                 heading: "Discription: ",
-                                values: dish!.description!,
+                                values: dish!.description,
                               ),
                               SectionHead(
                                 heading: 'Price ₹:  ',

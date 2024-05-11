@@ -37,31 +37,35 @@ class HomeCategoryGridviews extends StatelessWidget {
                   ),
                 );
               },
-              child: Container(
-                alignment: Alignment.center,
-                margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                decoration: BoxDecoration(
-                  color: Colors.grey[100],
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(width: 0.9,color: grey.withOpacity(0.5))
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.network(
-                      index < 6 ? state.categories[index].iconUrl! : '',
-                      height: heightSize * 1 / 10, filterQuality: FilterQuality.high,fit: BoxFit.fill,
-                    ),
-                    Text(
-                      index < 6 ? state.categories[index].name! : '',
-                      style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: grey),
-                    ),
-                    kHight10,
-                  ],
+              child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: Container(
+                            
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[100],
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(width: 0.9,color: grey.withOpacity(0.5))
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.network(
+                        index < 6 ? state.categories[index].iconUrl : '',
+                        height: heightSize * 1 / 10, filterQuality: FilterQuality.high,fit: BoxFit.fill,
+                      ),
+                      Text(
+                        index < 6 ? state.categories[index].name : '',
+                        style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: grey),
+                      ),
+                      kHight10,
+                    ],
+                  ),
                 ),
               ),
             );

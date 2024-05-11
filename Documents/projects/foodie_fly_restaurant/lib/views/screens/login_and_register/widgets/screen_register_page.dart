@@ -1,17 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodie_fly_restaurant/controllers/blocs/singup/signup_bloc.dart';
+import 'package:foodie_fly_restaurant/controllers/api_services/authentication/api_callings.dart';
 import 'package:foodie_fly_restaurant/models/restaurant.dart';
 import 'package:foodie_fly_restaurant/views/screens/main/screen_main_page.dart';
 import 'package:foodie_fly_restaurant/views/widgets/function_widgets/toggle_password_function.dart';
 import 'package:foodie_fly_restaurant/views/widgets/function_widgets/toggle_repassword_function.dart';
-
 import '../../../../controllers/cubits/toggle_password/toggle_password_cubit.dart';
 import '../../../../controllers/cubits/toggle_repassword/toggle_repassword_cubit.dart';
 import '../../../../utils/constants.dart';
 import '../../../../utils/text_form_field_validators.dart';
 import '../../../widgets/class_widgets/button_widget.dart';
-import '../../../widgets/class_widgets/demo_user.dart';
 import '../../../widgets/class_widgets/text_field_widget.dart';
 import '../../../widgets/function_widgets/snackbar_function.dart';
 
@@ -55,26 +55,26 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                 color: grey.withOpacity(0.5),
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // kHight10,
-                const Text(
-                  "Welcome",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  // kHight10,
+                  const Text(
+                    "Welcome",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                const Text(
-                  "Sign Up to your account",
-                  style: TextStyle(fontSize: 18),
-                ),
-                // kHight10,
-                Form(
-                  key: formKey,
-                  child: Column(
+                  const Text(
+                    "Sign Up to your account",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  // kHight10,
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -82,6 +82,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                       TextFieldWidget(
                         userController: restaurantNameController,
                         label: 'Restaurant name:',
+                        hinttext: " eg : Musthafa's Restaurant",
                         inputType: TextInputType.name,
                         obscureText: false,
                         validator: (value) {
@@ -95,6 +96,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                       TextFieldWidget(
                         userController: descriptionController,
                         label: 'Description:',
+                        hinttext: " eg : Hot and cool dinks",
                         inputType: TextInputType.name,
                         obscureText: false,
                         validator: (value) {
@@ -108,6 +110,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                       TextFieldWidget(
                         userController: emailController,
                         label: 'Email-address:',
+                        hinttext: 'eg : musthafa@gmail.com',
                         inputType: TextInputType.emailAddress,
                         obscureText: false,
                         validator: (value) {
@@ -123,6 +126,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                       TextFieldWidget(
                         userController: pinCodeController,
                         label: 'Pin Code:',
+                        hinttext: ' eg : 676109',
                         inputType: TextInputType.name,
                         obscureText: false,
                         validator: (value) {
@@ -138,6 +142,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                           return TextFieldWidget(
                             userController: passwordController,
                             label: 'Password:',
+                            hinttext: 'eg : Musthafa@123',
                             inputType: TextInputType.emailAddress,
                             obscureText: state,
                             suffixIcon: togglePassword(),
@@ -162,6 +167,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                           return TextFieldWidget(
                             userController: rePasswordController,
                             label: 'Re-enter Password:',
+                            hinttext: 'eg : Musthafa@123',
                             inputType: TextInputType.emailAddress,
                             obscureText: state,
                             suffixIcon: toggleRePassword(),
@@ -178,28 +184,29 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                         },
                       ),
                       kHight20,
-                      BlocConsumer<SignupBloc, SignupState>(
-                        listener: (context, state) {
-                          if (state is SellerRegistrationSuccessState) {
-                            Navigator.of(context)
-                                .pushReplacement(MaterialPageRoute(
-                              builder: (context) => ScreenMainPage(),
-                            ));
-                            showSnack(context, green, "successfully signed up");
-                          } else if (state
-                              is SellerRegistrationFailedInvalidfields) {
-                            showSnack(context, amber, "failed. invalid fields");
-                          } else if (state is SellerRegistrationFailedToLogin) {
-                            showSnack(context, amber, "failed to Login");
-                          } else if (state
-                              is SellerRegistrationFieldToParseBodyState) {
-                            showSnack(context, orange, "failed to parse body");
-                          } else if (state is SellerRegistrationErrorState) {
-                            showSnack(context, red, "Error");
-                          }
-                        },
-                        builder: (context, state) {
-                          return ButtonWidget(
+                      // BlocConsumer<SignupBloc, SignupState>(
+                      //   listener: (context, state) {
+                      //     if (state is SellerRegistrationSuccessState) {
+                      //       Navigator.of(context)
+                      //           .pushReplacement(MaterialPageRoute(
+                      //         builder: (context) => ScreenMainPage(),
+                      //       ));
+                      //       showSnack(context, green, "successfully signed up");
+                      //     } else if (state
+                      //         is SellerRegistrationFailedInvalidfields) {
+                      //       showSnack(context, amber, "failed. invalid fields");
+                      //     } else if (state is SellerRegistrationFailedToLogin) {
+                      //       showSnack(context, amber, "failed to Login");
+                      //     } else if (state
+                      //         is SellerRegistrationFieldToParseBodyState) {
+                      //       showSnack(context, orange, "failed to parse body");
+                      //     } else if (state is SellerRegistrationErrorState) {
+                      //       showSnack(context, red, "Error");
+                      //     }
+                      //   },
+                      //   builder: (context, state) {
+                      //     return 
+                          ButtonWidget(
                             width: size * 6 / 10,
                             height: size * 2.7 / 10,
                             text: 'Register',
@@ -220,20 +227,29 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                                   password: password,
                                   pinCode: pinCode,
                                 );
-                                context.read<SignupBloc>().add(
-                                    SellerSignupEvent(
-                                        restaurantRegisteration: restaurant));
+                                final value = await ApiSellerAuthentication().register(restaurant);
+                        if (value) {
+                          showSnack(
+                              context, Colors.green, 'Logged Successfully');
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ScreenMainPage(),));
+                                      //  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const ScreenLoginRestration(),), (route) => false,);
+                        } else {
+                          showSnack(context, Colors.red, 'Invalid entries');
+                        }
+                                // context.read<SignupBloc>().add(
+                                //     SellerSignupEvent(
+                                //         restaurantRegisteration: restaurant));
                               }
                             },
-                          );
-                        },
-                      ),
+                          ),
+                      //   },
+                      // ),
                       kHight20,
-                      const DemoUser(),
+                      // const DemoUser(),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

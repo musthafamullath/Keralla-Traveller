@@ -35,11 +35,6 @@ final class UpdateDishState extends DishState {
 
 final class GetDishesByCategoryState extends DishState {
   final List<DishModel> dishes;
-  
-  GetDishesByCategoryState({required this.dishes});
 
-}
-final class DeleteDishState extends DishState{
-  final int dishId;
-  DeleteDishState({required this.dishId});
+  GetDishesByCategoryState({required this.dishes});
 }

@@ -1,22 +1,26 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodie_fly_restaurant/controllers/api_services/dish/api_calling.dart';
 import 'package:foodie_fly_restaurant/controllers/blocs/category/category_bloc.dart';
 import 'package:foodie_fly_restaurant/controllers/blocs/dish/dish_bloc.dart';
 import 'package:foodie_fly_restaurant/models/category.dart';
 import 'package:foodie_fly_restaurant/models/dish.dart';
 import 'package:foodie_fly_restaurant/utils/constants.dart';
 import 'package:foodie_fly_restaurant/utils/text_styles.dart';
-import 'package:foodie_fly_restaurant/views/screens/category/widget/dish_circle_avatar.dart';
-import 'package:foodie_fly_restaurant/views/screens/category/widget/dish_trailling.dart';
+import 'package:foodie_fly_restaurant/views/screens/add_dishes/screen_add_dishes.dart';
 import 'package:foodie_fly_restaurant/views/screens/dish/screen_dish.dart';
 import 'package:foodie_fly_restaurant/views/widgets/class_widgets/app_bar_widget.dart';
 
 class ActionScreenCategory extends StatelessWidget {
-  const ActionScreenCategory({
+  ActionScreenCategory({
     super.key,
     required this.category,
   });
   final Category category;
+  DishModel? dish;
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +29,20 @@ class ActionScreenCategory extends StatelessWidget {
     context.read<CategoryBloc>().add(CategoryEvent());
     context
         .read<DishBloc>()
-        .add(GetDishesByCategoryEvent(categoryId: category.id!));
+        .add(GetDishesByCategoryEvent(categoryId: category.id));
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
-        child: AppBarWidget(title: category.name!),
+        child: AppBarWidget(title: category.name),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
           children: [
-            // kHight10,
             Expanded(
               child: BlocBuilder<DishBloc, DishState>(
+                buildWhen: (previous, current) =>
+                    current is GetDishesByCategoryState,
                 builder: (context, state) {
                   return state is GetDishesByCategoryState &&
                           state.dishes.isEmpty
@@ -49,18 +54,20 @@ class ActionScreenCategory extends StatelessWidget {
                             const TextSpan(text: ' is Empty', style: boldBlack),
                           ])),
                         )
-                      : ListView.builder(
+                      : ListView.separated(
                           itemCount: state is GetDishesByCategoryState
                               ? state.dishes.length
                               : 0,
                           itemBuilder: (context, index) {
-                            final dish = DishModel();
+                            dish = state is GetDishesByCategoryState
+                                ? state.dishes[index]
+                                : null;
                             return Container(
                               decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
+                                  color: Colors.grey.shade50,
                                   borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                      width: 0.7, color: yellow)),
+                                  border:
+                                      Border.all(width: 0.7, color: yellow)),
                               child: Column(
                                 children: [
                                   ListTile(
@@ -77,27 +84,24 @@ class ActionScreenCategory extends StatelessWidget {
                                       );
                                     },
                                     contentPadding: const EdgeInsets.symmetric(
-                                        horizontal: 0),
-                                    leading: state is GetDishesByCategoryState
-                                        ? DishCircleAvatar(
-                                            width: width,
-                                            height: height,
-                                            imageProvider: NetworkImage(
-                                              state.dishes[index].image!
-                                                  .toString(),
-                                            ),
-                                          )
-                                        : DishCircleAvatar(
-                                            width: width,
-                                            height: height,
-                                            imageProvider: const ImageIcon(
-                                                    AssetImage(
-                                                        'assets/icons/foods.png'))
-                                                as ImageProvider,
-                                          ),
+                                        horizontal: 10),
+                                    leading: Container(
+                                      width: width * .15,
+                                      height: height * .075,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: DecorationImage(
+                                            image: dish!.image == ''
+                                                ? const AssetImage(
+                                                        'assets/images/categories/dish.jpg')
+                                                    as ImageProvider
+                                                : NetworkImage(dish!.image),
+                                            fit: BoxFit.cover),
+                                      ),
+                                    ),
                                     title: Text(
                                       state is GetDishesByCategoryState
-                                          ? state.dishes[index].name!
+                                          ? state.dishes[index].name
                                           : '',
                                       style: boldBlack,
                                     ),
@@ -107,11 +111,121 @@ class ActionScreenCategory extends StatelessWidget {
                                           : '',
                                       style: semiBoldGrey,
                                     ),
-                                    trailing: DishTrailingOparations(
-                                      width: width,
-                                      dish: dish,
-                                      category: category,
-                                      index: index,
+                                    trailing: SizedBox(
+                                      width: width * .3,
+                                      child: BlocBuilder<CategoryBloc,
+                                          CategoryState>(
+                                        builder: (context, state) {
+                                          final categories = state.categories;
+                                          return Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              BlocBuilder<DishBloc, DishState>(
+                                                builder: (context, state) {
+                                                  return IconButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .push(
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ScreenAddDishes(
+                                                            categories:
+                                                                categories,
+                                                            operatior:
+                                                                Operatior.edit,
+                                                            dish: state
+                                                                    is GetDishesByCategoryState
+                                                                ? state.dishes[
+                                                                    index]
+                                                                : dish,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                    icon: CircleAvatar(
+                                                      backgroundColor: Colors
+                                                          .grey
+                                                          .withOpacity(0.1),
+                                                      child: const Icon(
+                                                        CupertinoIcons
+                                                            .eyedropper_halffull,
+                                                        size: 22,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                              IconButton(
+                                                onPressed: () async {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return AlertDialog(
+                                                          title: const Text(
+                                                              'Delete'),
+                                                          content: const Text(
+                                                              'Are you sure to delete?'),
+                                                          actions: [
+                                                            BlocBuilder<
+                                                                DishBloc,
+                                                                DishState>(
+                                                              builder: (
+                                                                context,
+                                                                state,
+                                                              ) {
+                                                                return state
+                                                                        is GetDishesByCategoryState
+                                                                    ? TextButton(
+                                                                        child: const Text(
+                                                                            'Delete'),
+                                                                        onPressed:
+                                                                            () async {
+                                                                          await DishApiServices()
+                                                                              .deleteDish(state.dishes[index].dishId)
+                                                                              .then(
+                                                                                (value) => context.read<DishBloc>().add(
+                                                                                      GetDishesByCategoryEvent(
+                                                                                        categoryId: category.id,
+                                                                                      ),
+                                                                                    ),
+                                                                              );
+
+                                                                        
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        },
+                                                                      )
+                                                                    : const SizedBox();
+                                                              },
+                                                            ),
+                                                            TextButton(
+                                                              child: const Text(
+                                                                  'Cancel'),
+                                                              onPressed:
+                                                                  () async {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      });
+                                                },
+                                                icon: CircleAvatar(
+                                                  backgroundColor: Colors.grey
+                                                      .withOpacity(0.1),
+                                                  child: const Icon(
+                                                    CupertinoIcons
+                                                        .delete,
+                                                    size: 22,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          );
+                                        },
+                                      ),
                                     ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
@@ -123,11 +237,14 @@ class ActionScreenCategory extends StatelessWidget {
                                 ],
                               ),
                             );
-                          },
+                          }, separatorBuilder: (BuildContext context, int index) { 
+                            return kHight20;
+                           },
                         );
                 },
               ),
-            )
+            ),
+           
           ],
         ),
       ),

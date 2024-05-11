@@ -20,7 +20,7 @@ class ScreenOffers extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    context.read<OfferBloc>().add(GetOffersEvent());
+    context.read<OfferBloc>().add(GetAllOffersEvent());
     context.read<CategoryBloc>().add(CategoryEvent());
 
     return Scaffold(
@@ -28,19 +28,14 @@ class ScreenOffers extends StatelessWidget {
         preferredSize: Size.fromHeight(80),
         child: AppBarWidget(title: "Offers"),
       ),
-      body: BlocBuilder<OfferBloc, OfferState>(
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 10,right: 10,top: 7),
-            child: state.offers.isEmpty
+      body: Padding(
+        padding: const EdgeInsets.only(left: 10,right: 10,top: 7),
+        child: BlocBuilder<OfferBloc, OfferState>(
+          builder: (context, state) {
+            return state.offers.isEmpty
                 ? const Center(
-                    child: Column(
-                    children: <Widget>[
-                       CircularProgressIndicator(),
-                       Divider(),
-                      Text(' Empty', style: boldGrey),
-                    ],
-                  ))
+                  child:CircularProgressIndicator(),
+                )
                 : ListView.builder(
                     itemCount: state.offers.length,
                     itemBuilder: (context, index) {
@@ -141,11 +136,11 @@ class ScreenOffers extends StatelessWidget {
                                               builder: (context, state) {
                                                 return SectionHead(
                                                     heading: "Category : ",
-                                                    values: state
-                                                        .categories[index]
-                                                        .name!);
+                                                    values: state.categories[index].name);
                                               },
                                             ),
+                               
+                               
                                             SectionHead(
                                                 heading: 'Started : ',
                                                 values: state
@@ -213,9 +208,9 @@ class ScreenOffers extends StatelessWidget {
                         ],
                       );
                     },
-                  ),
-          );
-        },
+                  );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionBTN(
         icon: Icons.add,
@@ -223,7 +218,7 @@ class ScreenOffers extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const ScreenAddOffer(),
+              builder: (context) =>  ScreenAddOffer(),
             ),
           );
         },

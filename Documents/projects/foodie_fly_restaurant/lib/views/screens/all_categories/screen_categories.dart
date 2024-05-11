@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodie_fly_restaurant/controllers/api_services/dish/api_calling.dart';
 import 'package:foodie_fly_restaurant/controllers/blocs/category/category_bloc.dart';
 import 'package:foodie_fly_restaurant/utils/constants.dart';
 import 'package:foodie_fly_restaurant/views/screens/add_dishes/screen_add_dishes.dart';
@@ -29,6 +32,7 @@ class ScreenAllCategories extends StatelessWidget {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () async {
+                  await DishApiServices().fetchDishesbyCategory(state.categories[index].id);
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => ActionScreenCategory(category: state.categories[index],),
@@ -41,7 +45,7 @@ class ScreenAllCategories extends StatelessWidget {
                       horizontal: 8, vertical: 12),
                  
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
+                    color: Colors.grey.shade50,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(width: 2,color: Colors.grey.shade300)
                   ),
@@ -50,15 +54,15 @@ class ScreenAllCategories extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.network(
-                        state.categories[index].iconUrl!,
+                        state.categories[index].iconUrl,
                         height: height * 1.7/ 10,
                         width: width,
                       ),
                       
                       Text(
-                        state.categories[index].name!,
+                        state.categories[index].name,
                         style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 12, fontWeight: FontWeight.bold),
                       ),
                       kHight10,
                     ],

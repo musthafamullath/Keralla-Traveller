@@ -31,8 +31,6 @@ class _ScreenHomeState extends State<ScreenHome> {
     final width = MediaQuery.of(context).size.width;
     context.read<ProfileBloc>().add(GetProfileEvent());
     context.read<OrderBloc>().add(GetAllOrdersEvent());
-    // context.read<SalesDailyBloc>().add(SalesDailyEvent());
-    // context.read<SalesTotelBloc>().add(SalesTotelEvent());
     context.read<CategoryBloc>().add(CategoryEvent());
     return Scaffold(
       body: Stack(
@@ -65,11 +63,11 @@ class _ScreenHomeState extends State<ScreenHome> {
                     builder: (context, state) {
                       return state.orders.isEmpty
                           ? const Center(
-                              child: CircularProgressIndicator(),
+                              child: Text("There is any recent orders abailable",style: regularGrey,),
                             )
                           : Column(
                               children: List.generate(
-                                state.orders.length,
+                                2,
                                 (index) {
                                   return Padding(
                                     padding: const EdgeInsets.only(

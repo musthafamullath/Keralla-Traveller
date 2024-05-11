@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Foodie Fly Restaurant',
+        title: 'Fork Plate Restaurant',
         theme: ThemeData(
           primaryColor: orangePointWithblue,
           useMaterial3: true,

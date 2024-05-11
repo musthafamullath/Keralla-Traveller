@@ -16,7 +16,7 @@ class SellerSalesPanalWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<SalesReportBloc>().add(GetDailySalesReportEvent());
     return Positioned(
-      top: 110,
+      top: 120,
       left: 33,
       child: Container(
         width: width * 8.5 / 10,
