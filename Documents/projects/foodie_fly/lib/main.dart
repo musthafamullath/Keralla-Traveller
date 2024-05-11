@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Foodie Fly',
+        title: 'Fork Plate Cleint',
         theme: ThemeData(
           primaryColor: yellowGreen,
           useMaterial3: true,

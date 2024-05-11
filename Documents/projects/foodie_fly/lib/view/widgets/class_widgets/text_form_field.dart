@@ -8,10 +8,11 @@ class TextFieldWidget extends StatelessWidget {
     this.label,
     this.inputType,
     this.obscureText,
-    this.suffixIcon,
+    this.suffixIcon, this.hintText,
   });
   final TextEditingController? userController;
   final String? label;
+  final String? hintText;
   final TextInputType? inputType;
   final bool? obscureText;
   final String? Function(String?) validator;
@@ -34,7 +35,8 @@ class TextFieldWidget extends StatelessWidget {
         validator: validator,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
-          label: Text(label!),
+          labelText: label,
+          hintText: hintText,
           suffixIcon: suffixIcon,
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 20,

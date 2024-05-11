@@ -42,11 +42,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             total: total,
             discount: discount,
             couponCode: ''));
-            emit(AddToCartState());
+            // emit(AddToCartState());
       } else {
         showSnack(
             event.context, Colors.red, 'Select dish from same resturant.');
-            emit(GetAllCartItemsFaildState());
+            // emit(GetAllCartItemsFaildState());
       }
     });
 
@@ -64,7 +64,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       } else {
         showSnack(
             event.context, Colors.red, 'Choose dish from same resturant.');
-            emit(GetAllCartItemsFaildState());
+            // emit(GetAllCartItemsFaildState());
       }
     });
 
@@ -82,7 +82,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       } else {
         showSnack(
             event.context, Colors.red, 'Select dish from same resturant.');
-            emit(GetAllCartItemsFaildState());
+            // emit(GetAllCartItemsFaildState());
       }
     });
 
@@ -135,14 +135,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         Navigator.of(event.context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => ScreenMainPage()),
             (route) => false);
-            emit(CheckOutSuccessState());
+            // emit(CheckOutSuccessState());
       } else {
         Navigator.of(event.context).push(
           MaterialPageRoute(
             builder: (context) => ScreenPayment(response: value),
           ),
         );
-         emit(CheckOutFaildState());
+        //  emit(CheckOutFaildState());
       }
     });
   }

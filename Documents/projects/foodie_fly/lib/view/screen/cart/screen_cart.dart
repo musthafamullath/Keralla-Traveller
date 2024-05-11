@@ -14,7 +14,6 @@ import 'package:foodie_fly/view/screen/main/screen_main_page.dart';
 import 'package:foodie_fly/view/screen/restaurants/widgets/restaurant_dishes.dart';
 import 'package:foodie_fly/view/widgets/class_widgets/app_bar_widget.dart';
 import 'package:foodie_fly/view/widgets/class_widgets/item_row.dart';
-import 'package:foodie_fly/view/widgets/function_widgets/snackbar.dart';
 import 'package:input_quantity/input_quantity.dart';
 
 class ScreenCart extends StatelessWidget {
@@ -43,7 +42,7 @@ class ScreenCart extends StatelessWidget {
                   ? const Center(
                       child: Text(
                         "Your Cart is Empty",
-                        style: bigBoldBlack,
+                        style: semiBoldGrey,
                       ),
                     )
                   : SingleChildScrollView(
@@ -63,17 +62,7 @@ class ScreenCart extends StatelessWidget {
                                       width: 2, color: Colors.grey.shade300)),
                               child: Column(
                                 children: [
-                                  BlocConsumer<CartBloc, CartState>(
-                                    listener: (context, state) {
-                                      if (state is AddToCartState) {
-                                        showSnack(
-                                            context, kGreen, "Added To Cart");
-                                      } else if (state
-                                          is GetAllCartItemsFaildState) {
-                                        showSnack(
-                                            context, kGreen, "Added To Faild");
-                                      } else {}
-                                    },
+                                  BlocBuilder<CartBloc, CartState>(
                                     builder: (context, state) {
                                       return state is GetAllCartItemsState &&
                                               state.cartItems.isEmpty

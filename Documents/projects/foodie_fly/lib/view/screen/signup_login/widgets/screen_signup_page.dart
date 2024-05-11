@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodie_fly/controller/api_sevices/sign_up_login/api_calling.dart';
-import 'package:foodie_fly/controller/blocs/sign_up/sign_up_bloc.dart';
 import 'package:foodie_fly/controller/cubits/toggle_password/toggle_password_cubit.dart';
 import 'package:foodie_fly/controller/cubits/toggle_repasswod/toggle_repassword_cubit.dart';
 import 'package:foodie_fly/model/user.dart';
@@ -12,9 +11,7 @@ import 'package:foodie_fly/utils/text_styles.dart';
 import 'package:foodie_fly/utils/validaters.dart';
 import 'package:foodie_fly/view/screen/otp/screen_otp.dart';
 import 'package:foodie_fly/view/widgets/class_widgets/button_widget.dart';
-import 'package:foodie_fly/view/widgets/class_widgets/demo_user.dart';
 import 'package:foodie_fly/view/widgets/class_widgets/text_form_field.dart';
-import 'package:foodie_fly/view/widgets/function_widgets/snackbar.dart';
 import 'package:foodie_fly/view/widgets/function_widgets/toggle_password.dart';
 import 'package:foodie_fly/view/widgets/function_widgets/toggle_repassword.dart';
 
@@ -71,6 +68,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                     TextFieldWidget(
                       userController: emailController,
                       label: 'Email-address:',
+                      hintText: ' eg : kalad@gmail.com',
                       inputType: TextInputType.emailAddress,
                       obscureText: false,
                       validator: (value) {
@@ -86,6 +84,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                     TextFieldWidget(
                       userController: firstController,
                       label: 'First name',
+                      hintText: ' eg : Mohammed',
                       inputType: TextInputType.name,
                       obscureText: false,
                       validator: (value) {
@@ -99,6 +98,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                     TextFieldWidget(
                       userController: lastController,
                       label: 'Last Name',
+                      hintText: ' eg : Musthafa',
                       inputType: TextInputType.name,
                       obscureText: false,
                       validator: (value) {
@@ -112,6 +112,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                     TextFieldWidget(
                         userController: mobileController,
                         label: "Phone number",
+                        hintText: ' type with your coundry code ( eg :+91 )',
                         inputType: TextInputType.phone,
                         obscureText: false,
                         validator: (value) {
@@ -127,6 +128,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                         return TextFieldWidget(
                           userController: passwordController,
                           label: 'Password:',
+                          hintText: ' eg : Kalad@123',
                           inputType: TextInputType.emailAddress,
                           obscureText: state,
                           suffixIcon: togglePassword(),
@@ -151,6 +153,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                         return TextFieldWidget(
                           userController: rePassController,
                           label: 'Re-enter Password:',
+                            hintText: ' eg : Kalad@123',
                           inputType: TextInputType.emailAddress,
                           obscureText: state,
                           suffixIcon: toggleRePassword(),
@@ -251,7 +254,7 @@ class _ScreenRegisterPageState extends State<ScreenRegisterPage> {
                     //   },
                     // ),
                     kHight10,
-                    const DemoUser(),
+                    // const DemoUser(),
                   ],
                 ),
               ),

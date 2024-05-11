@@ -6,7 +6,6 @@ import 'package:foodie_fly/utils/constants.dart';
 import 'package:foodie_fly/utils/validaters.dart';
 import 'package:foodie_fly/view/screen/forgot_password/screen_forgotpassword.dart';
 import 'package:foodie_fly/view/widgets/class_widgets/button_widget.dart';
-import 'package:foodie_fly/view/widgets/class_widgets/demo_user.dart';
 import 'package:foodie_fly/view/widgets/class_widgets/text_btn_widget.dart';
 import 'package:foodie_fly/view/widgets/class_widgets/text_form_field.dart';
 import 'package:foodie_fly/view/widgets/function_widgets/toggle_password.dart';
@@ -61,6 +60,7 @@ class _ScreenLoginPageState extends State<ScreenLoginPage> {
                   TextFieldWidget(
                     userController: userController,
                     label: 'Email-address:',
+                    hintText: ' eg : kalad@gmail.com',
                     inputType: TextInputType.emailAddress,
                     obscureText: false,
                     validator: (value) {
@@ -77,6 +77,7 @@ class _ScreenLoginPageState extends State<ScreenLoginPage> {
                       return TextFieldWidget(
                         userController: passwordController,
                         label: 'Password:',
+                        hintText: ' eg : Kalad@123',
                         inputType: TextInputType.name,
                         obscureText: state,
                         suffixIcon: togglePassword(),
@@ -166,7 +167,7 @@ class _ScreenLoginPageState extends State<ScreenLoginPage> {
                   //   },
                   // ),
                   kHight10,
-                  const DemoUser(),
+                  // const DemoUser(),
                 ],
               ),
               kHight10,

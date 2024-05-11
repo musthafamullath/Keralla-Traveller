@@ -3,9 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie_fly/controller/api_sevices/sign_up_login/api_calling.dart';
 import 'package:foodie_fly/utils/constants.dart';
-import 'package:foodie_fly/view/screen/main/screen_main_page.dart';
 import 'package:foodie_fly/view/screen/signup_login/screen_login_and_signup.dart';
-import 'package:foodie_fly/view/screen/signup_login/widgets/screen_login_page.dart';
 import 'package:foodie_fly/view/widgets/class_widgets/button_widget.dart';
 import 'package:foodie_fly/view/widgets/class_widgets/text_btn_widget.dart';
 import 'package:foodie_fly/view/widgets/function_widgets/snackbar.dart';
@@ -66,6 +64,7 @@ class ScreenOTP extends StatelessWidget {
                           focusNode: focusNodes[index],
                           validator: (value) {
                             if (value!.isEmpty) return '';
+                            return null;
                           },
                           keyboardType: TextInputType.number,
                           onChanged: (value) {

@@ -1,32 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:foodie_fly/utils/constants.dart';
 
-class SplashComponeses extends StatelessWidget {
+
+class SplashComponeses extends StatefulWidget {
   const SplashComponeses({
     super.key,
   });
 
   @override
+  State<SplashComponeses> createState() => _SplashComponesesState();
+}
+
+class _SplashComponesesState extends State<SplashComponeses> {
+  @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: SingleChildScrollView(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+    return const SingleChildScrollView(
+      child: Center(
+        child: Column(
           children: [
-            Text.rich(TextSpan(children: [
-              TextSpan(
-                text: 'FOODIE ',
-                style: TextStyle(
-                  fontSize: 50,
-                  color: white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              TextSpan(
-                children: [
+            kHight100,
+            kHight100,
+            kHight100,
+            kHight100,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text.rich(TextSpan(children: [
                   TextSpan(
-                    text: 'FLY',
+                    text: 'FORK ',
+                    style: TextStyle(
+                      fontSize: 50,
+                      color: white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextSpan(
+                    text: 'PLATE',
                     style: TextStyle(
                       backgroundColor: white,
                       decoration: TextDecoration.underline,
@@ -37,9 +48,23 @@ class SplashComponeses extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                ]))
+              ],
+            ),
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Cleint',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
-            ]))
+            ),
           ],
         ),
       ),

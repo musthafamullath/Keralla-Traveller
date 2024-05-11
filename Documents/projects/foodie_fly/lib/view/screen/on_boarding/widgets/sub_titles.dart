@@ -6,9 +6,9 @@ class SubTitles extends StatelessWidget {
   final int position;
 
   final subTitles = [
-    "Browse through our extensive list of restaurants and dishes, and when you're ready to order, simply add your desired items to your cart and checkout. It's that easy!",
-    'Get your favorite meals delivered to your doorstep for free with our online food delivery app - enjoy a whole month of complimentary delivery!',
-    'Get your favorite meals delivered to your doorstep for free with our online food delivery app - enjoy a whole month of complimentary delivery!'
+    "Embark on a culinary journey with our diverse food categories, from traditional to exotic. Indulge in tantalizing dishes designed to delight your taste buds, accompanied by exclusive offers. Discover surprises awaiting your exploration!",
+    "Embark on a gastronomic adventure at our diverse restaurants. From cozy cafes to elegant eateries, each venue promises a unique ambiance and enticing menu. Discover memorable dining experiences that cater to every palate.",
+    "Begin your food ordering journey now. Explore our menu and place your order hassle-free. Savor delicious dishes delivered right to your doorstep."
   ];
 
   @override
@@ -17,7 +17,7 @@ class SubTitles extends StatelessWidget {
       subTitles[position],
       textAlign: TextAlign.center,
       style: const TextStyle(
-        fontSize: 18,
+        fontSize: 16,
       ),
     );
   }

@@ -16,9 +16,9 @@ final class GetAllCartItemsState extends CartState {
       required this.couponCode});
 }
 
-final class AddToCartState extends CartState {}
+// final class AddToCartState extends CartState {}
 
-final class GetAllCartItemsFaildState extends CartState{}
+// final class GetAllCartItemsFaildState extends CartState{}
 
 final class GetAllCouponsState extends CartState {
   final List<Coupon> coupons;
@@ -31,5 +31,5 @@ final class RedeemCouponState extends CartState {
   RedeemCouponState({required this.actualTotal, required this.redeemAmount});
 }
 
-final class CheckOutSuccessState extends CartState{}
-final class CheckOutFaildState extends CartState{}
+// final class CheckOutSuccessState extends CartState{}
+// final class CheckOutFaildState extends CartState{}

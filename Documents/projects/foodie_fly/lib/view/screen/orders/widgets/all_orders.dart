@@ -18,7 +18,11 @@ class AllOrders extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    return Padding(
+    return order.isEmpty
+    ?
+    const Center(child: Text('List is Empty',style: semiBoldGrey,),)
+    :
+    Padding(
       padding: const EdgeInsets.only(left: 15,right: 15),
       child: ListView.builder(
         itemCount: order.length,

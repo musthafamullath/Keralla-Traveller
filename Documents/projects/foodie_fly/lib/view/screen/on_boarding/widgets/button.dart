@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodie_fly/utils/text_styles.dart';
 import 'package:foodie_fly/view/screen/signup_login/screen_login_and_signup.dart';
 
 class NextButton extends StatelessWidget {
@@ -13,18 +14,22 @@ class NextButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         SizedBox(
-          width: width * .3,
-          child: ElevatedButton(
-            onPressed: () async {
-              // ignore: use_build_context_synchronously
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const ScreenLoginRestration() ));
-            },
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+          width: width * .5,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 50),
+            child: ElevatedButton(
+              onPressed: () async {
+                // ignore: use_build_context_synchronously
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const ScreenLoginRestration() ));
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+              child: Text(position == 2 ? "Let's Start" : 'Skip',style: semiBoldWhite,),
             ),
-            child: Text(position == 2 ? "Let's Start" : 'Skip'),
           ),
         ),
       ],

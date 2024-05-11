@@ -5,7 +5,6 @@ import 'package:foodie_fly/model/dish.dart';
 import 'package:foodie_fly/utils/constants.dart';
 import 'package:foodie_fly/utils/text_styles.dart';
 import 'package:foodie_fly/view/screen/dish_detatils/widget/favorites_button.dart';
-import 'package:foodie_fly/view/widgets/function_widgets/snackbar.dart';
 
 class AddToCartButton extends StatelessWidget {
   const AddToCartButton({
@@ -27,32 +26,25 @@ class AddToCartButton extends StatelessWidget {
         SizedBox(
           width: width *4/10,
           height: height * 0.5/10,
-          child: BlocListener<CartBloc, CartState>(
-            listener: (context, state) {
-              if(state is AddToCartState){
-                showSnack(context, kGreen, "Added To Cart");
-              }
+          child: ElevatedButton.icon(
+            onPressed: () async {
+              context
+                  .read<CartBloc>()
+                  .add(AddToCartEvent(dishId: dish.dishId, context: context));
             },
-            child: ElevatedButton.icon(
-              onPressed: () async {
-                context
-                    .read<CartBloc>()
-                    .add(AddToCartEvent(dishId: dish.dishId, context: context));
-              },
-              icon: const Icon(
-                Icons.shopping_bag_outlined,
-                size: 32,
-                color: white,
-              ),
-              label: const Text(
-                'Add to bag',
-                style: regularWhite,
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: yellowGreen,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-              ),
+            icon: const Icon(
+              Icons.shopping_bag_outlined,
+              size: 32,
+              color: white,
+            ),
+            label: const Text(
+              'Add to bag',
+              style: regularWhite,
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: yellowGreen,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
             ),
           ),
         ),

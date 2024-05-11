@@ -15,9 +15,9 @@ class ScreenIndicator extends StatelessWidget {
         return Row(
           children: [
             CircleAvatar(
-              radius: 8,
+              radius: 7.5,
               backgroundColor:
-                  index == position ? Colors.green[800] : Colors.grey,
+                  index == position ? Colors.green[900] : Colors.grey.shade400,
             ),
             kWidth10
           ],

@@ -5,9 +5,9 @@ class Titles extends StatelessWidget {
 
   final int position;
   final titles = [
-    'Wide range of Food Categories & more',
-    'Free Deliveries for One Month!',
-    'Get started on Ordering your Food'
+    "Explore a Diverse Selection of Food Categories, Dishes, Offers & More!",
+    "Discover Our Restaurants",
+    'Get started on Ordering your Foods'
   ];
 
   @override
@@ -16,7 +16,7 @@ class Titles extends StatelessWidget {
       titles[position],
       textAlign: TextAlign.center,
       style: const TextStyle(
-        fontSize: 36,
+        fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
     );
