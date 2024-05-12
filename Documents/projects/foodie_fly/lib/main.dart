@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Fork Plate Cleint',
+        title: 'Fork Plate Client',
         theme: ThemeData(
           primaryColor: yellowGreen,
           useMaterial3: true,

@@ -55,7 +55,7 @@ class _SplashComponesesState extends State<SplashComponeses> {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: 'Cleint',
+                    text: 'Client',
                     style: TextStyle(
                       fontSize: 25,
                       color: white,
