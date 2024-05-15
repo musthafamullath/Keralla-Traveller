@@ -1,9 +1,10 @@
 //--------------------------------------------------------------------------------------//
 String privacyAndpolicy = 
-'''Privacy Policy  
+'''
+Privacy Policy  
 ==============
 
-Last updated: May 07, 2024
+Last updated: May 12, 2024
 
 This Privacy Policy describes Our policies and procedures on the collection,
 use and disclosure of Your information when You use the Service and tells You
@@ -12,8 +13,8 @@ about Your privacy rights and how the law protects You.
 We use Your Personal data to provide and improve the Service. By using the
 Service, You agree to the collection and use of information in accordance with
 this Privacy Policy. This Privacy Policy has been created with the help of the
-[Free Privacy Policy Generator](https://www.freeprivacypolicy.com/free-
-privacy-policy-generator/).
+[Privacy Policy Generator](https://www.termsfeed.com/privacy-policy-
+generator/).
 
 Interpretation and Definitions  
 ------------------------------
@@ -83,10 +84,6 @@ identifiable information that can be used to contact or identify You.
 Personally identifiable information may include, but is not limited to:
 
   * Email address
-
-  * First name and last name
-
-  * Address, State, Province, ZIP/Postal code, City
 
   * Usage Data
 
@@ -327,6 +324,8 @@ Contact Us
 If you have any questions about this Privacy Policy, You can contact us:
 
   * By email: musthafa404601kalad@gmail.com
+
+  * By phone number: +918086404601
 
  ''';
 

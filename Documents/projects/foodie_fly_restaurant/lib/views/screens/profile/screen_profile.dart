@@ -47,7 +47,7 @@ class ScreenProfile extends StatelessWidget {
                             children: [
                               kHight20,
                               ProfileSpanText(
-                                indicateText: 'Seller Name:  ',
+                                indicateText: 'Restaurant Name:  ',
                                 valueText: state.profile?.name ?? 'Name',
                               ),
                               kHight10,
