@@ -3,17 +3,17 @@ part of 'dish_bloc.dart';
 class DishEvent {}
 
 class AddVegEvent extends DishEvent {
-  bool isVeg;
+ final bool isVeg;
   AddVegEvent({required this.isVeg});
 }
 
 class AddAvailableEvent extends DishEvent {
-  bool isAvailable;
+ final bool isAvailable;
   AddAvailableEvent({required this.isAvailable});
 }
 
 class AddCategoryEvent extends DishEvent {
-  int categoryId;
+  final int categoryId;
   AddCategoryEvent({required this.categoryId});
 }
 

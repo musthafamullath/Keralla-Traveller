@@ -1,2 +1,5 @@
 part of 'category_bloc.dart';
-class CategoryEvent {}
+
+abstract class CategoryEvent {}
+
+class FetchCategories extends CategoryEvent {}

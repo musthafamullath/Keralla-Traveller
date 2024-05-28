@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:foodie_fly_restaurant/controllers/blocs/dish/dish_bloc.dart';
 import 'package:foodie_fly_restaurant/models/category.dart';
 import 'package:foodie_fly_restaurant/models/dish.dart';
@@ -87,7 +88,7 @@ class _ScreenAddDishesState extends State<ScreenAddDishes> {
           if (state is AddNewDishState) {}
           return state is AddNewDishState && state.isLoading
               ? const Center(
-                  child: CircularProgressIndicator()
+                  child: SpinKitFadingGrid(color: yellow,size: 50,)
                 )
               : SingleChildScrollView(
                   child: Padding(

@@ -1,20 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodie_fly_restaurant/controllers/blocs/category/category_bloc.dart';
 import 'package:foodie_fly_restaurant/controllers/blocs/order/order_bloc.dart';
 import 'package:foodie_fly_restaurant/controllers/blocs/profile/profile_bloc.dart';
 import 'package:foodie_fly_restaurant/utils/constants.dart';
-import 'package:foodie_fly_restaurant/utils/text_styles.dart';
 import 'package:foodie_fly_restaurant/views/screens/add_dishes/screen_add_dishes.dart';
 import 'package:foodie_fly_restaurant/views/screens/all_categories/screen_categories.dart';
 import 'package:foodie_fly_restaurant/views/screens/category/screen_categories.dart';
 import 'package:foodie_fly_restaurant/views/screens/home/widgets/appbar_widget.dart';
+import 'package:foodie_fly_restaurant/views/screens/home/widgets/recent_order_widget.dart';
 import 'package:foodie_fly_restaurant/views/screens/home/widgets/seller_sales_panal_widget.dart';
 import 'package:foodie_fly_restaurant/views/screens/home/widgets/viewall_widget.dart';
-import 'package:foodie_fly_restaurant/views/screens/order_details/order_details.dart';
 import 'package:foodie_fly_restaurant/views/screens/orders/screen_orders.dart';
-import 'package:intl/intl.dart';
 
 import 'widgets/floating_action_btn.dart';
 
@@ -32,7 +29,7 @@ class _ScreenHomeState extends State<ScreenHome> {
     final height = MediaQuery.of(context).size.height;
     context.read<ProfileBloc>().add(GetProfileEvent());
     context.read<OrderBloc>().add(GetAllOrdersEvent());
-    context.read<CategoryBloc>().add(CategoryEvent());
+    context.read<CategoryBloc>().add(FetchCategories());
     return Scaffold(
       body: Stack(
         children: [
@@ -60,110 +57,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                       },
                     ),
                   ),
-                  BlocBuilder<OrderBloc, OrderState>(
-                    builder: (context, state) {
-                      return state.orders.isEmpty
-                          ? const Center(
-                              child: Text(
-                                "There is any recent orders abailable",
-                                style: regularGrey,
-                              ),
-                            )
-                          : AspectRatio(
-                            aspectRatio: 1.5,
-                            child: Container(
-                              margin: const EdgeInsets.only(left: 20,right: 20,),
-                              padding: const EdgeInsets.only(top: 10,bottom: 10),
-                                height: height * 3/10,
-                                width: width * 1,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade100,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: List.generate(
-                                      state.orders.length,
-                                      (index) {
-                                        return Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 10, right: 10),
-                                          child: Card(
-                                            shadowColor: grey,
-                                            surfaceTintColor: grey,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      width: 1.5,
-                                                      color: Colors.grey.shade300),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10)),
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 10, vertical: 5),
-                                                child: Column(
-                                                  children: [
-                                                    ListTile(
-                                                      contentPadding:
-                                                          const EdgeInsets
-                                                              .symmetric(
-                                                              horizontal: 8),
-                                                      title: Text(
-                                                        'Order id: ${state.orders[index].orderId}',
-                                                        style: regularGrey,
-                                                      ),
-                                                      subtitle: Text(
-                                                        'Order Amount: ₹ ${state.orders[index].totalPrice - state.orders[index].deliveryCharge}\nDate: ${DateFormat('d MMMM yyyy').format(DateTime.parse(state.orders[index].orderDate))}',
-                                                        style: regularGrey,
-                                                      ),
-                                                      trailing: CircleAvatar(
-                                                        backgroundColor: Colors.grey
-                                                            .withOpacity(0.3),
-                                                        radius: 24,
-                                                        child: IconButton(
-                                                          onPressed: () {
-                                                            Navigator.of(context)
-                                                                .push(
-                                                              MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    ScreenOrderDetails(
-                                                                  order:
-                                                                      state.orders[
-                                                                          index],
-                                                                ),
-                                                              ),
-                                                            );
-                                                          },
-                                                          icon: const Icon(
-                                                            CupertinoIcons
-                                                                .chevron_forward,
-                                                            size: 32,
-                                                            fill: BorderSide
-                                                                .strokeAlignCenter,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                30),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          );
-                    },
-                  ),
-                  kHight20,
+                  RecentOrders(height: height, width: width),
+                  // kHight20,
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ViewAllwidget(
@@ -176,10 +71,10 @@ class _ScreenHomeState extends State<ScreenHome> {
                       },
                     ),
                   ),
-                  kHight20,
+                  // kHight20,
                   const HomeCategoryGridviews(),
                   kHight50,
-                  kHight20,
+                  // kHight20,
                 ],
               ),
             ),

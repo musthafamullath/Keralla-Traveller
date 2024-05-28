@@ -17,7 +17,7 @@ class ScreenAllCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    context.read<CategoryBloc>().add(CategoryEvent());
+    context.read<CategoryBloc>().add(FetchCategories());
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),

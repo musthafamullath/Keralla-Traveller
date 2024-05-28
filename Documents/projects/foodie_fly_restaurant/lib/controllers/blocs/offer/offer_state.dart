@@ -1,10 +1,31 @@
 part of 'offer_bloc.dart';
 
-class OfferState {
+abstract class OfferState {}
+
+class OfferInitial extends OfferState {}
+
+class OfferLoading extends OfferState {}
+
+class OfferLoaded extends OfferState {
   final List<Offer> offers;
-  OfferState({required this.offers});
+
+  OfferLoaded({required this.offers});
 }
 
-final class OfferInitial extends OfferState {
-  OfferInitial() : super(offers: []);
+class OfferError extends OfferState {
+  final String message;
+
+  OfferError({required this.message});
+}
+
+class OfferUpdateLoading extends OfferState {}
+
+class OfferUpdateSuccess extends OfferState {
+  final List<Offer> offers;
+  OfferUpdateSuccess({required this.offers});
+}
+
+class OfferUpdateError extends OfferState {
+  final String message;
+  OfferUpdateError({required this.message});
 }

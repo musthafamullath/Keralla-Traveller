@@ -39,7 +39,7 @@ class ScreenOrderDetails extends StatelessWidget {
                     // height: height * .25,
                     padding: const EdgeInsets.all(28),
                     decoration: BoxDecoration(
-                      color: Colors.grey[200],
+                      color: Colors.grey[50],
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.yellow, width: 1),
                     ),
@@ -145,7 +145,7 @@ class ScreenOrderDetails extends StatelessWidget {
                       width: width,
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: Colors.grey[50],
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Colors.yellow, width: 1),
                       ),

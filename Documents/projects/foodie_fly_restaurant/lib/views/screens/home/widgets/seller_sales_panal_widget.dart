@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodie_fly_restaurant/controllers/blocs/sales_report/sales_report_bloc.dart';
 import 'package:foodie_fly_restaurant/utils/constants.dart';
 import 'package:foodie_fly_restaurant/utils/text_styles.dart';
+import 'package:foodie_fly_restaurant/views/widgets/class_widgets/shimmer_widget.dart';
 
 class SellerSalesPanalWidget extends StatelessWidget {
   const SellerSalesPanalWidget({
@@ -29,98 +30,104 @@ class SellerSalesPanalWidget extends StatelessWidget {
             color: black,
           ),
         ),
-        child: BlocBuilder<SalesReportBloc, SalesReportState>(
-          builder: (context, state) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width: width * 3 / 10,
-                  height: 100 / 01,
-                  decoration: BoxDecoration(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              width: width * 3 / 10,
+              height: 100 / 01,
+              decoration: BoxDecoration(
+                color: yellow,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
                     color: yellow,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: yellow,
-                        border: Border.all(
-                            width: 1, color:black),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 6),
-                          child: Text(
-                            "Today's Orders",
-                            style: semiBoldBlack,
-                          ),
-                        ),
-                        Divider(
-                          thickness: 2,
-                          color: Colors.yellow.shade300,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 6),
-                          child: Text(
+                    border: Border.all(width: 1, color: black),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 6),
+                      child: Text(
+                        "Today's Orders",
+                        style: semiBoldBlack,
+                      ),
+                    ),
+                    Divider(
+                      thickness: 2,
+                      color: Colors.yellow.shade300,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: BlocBuilder<SalesReportBloc, SalesReportState>(
+                        builder: (context, state) {
+                          return state is SalesReportLoading ? const ShimmerClass() :Text(
                             '${state.report?.saleCount}',
                             style: const TextStyle(
                               fontSize: 20,
                               color: black,
                               fontWeight: FontWeight.bold,
                             ),
-                          ),
-                        ),
-                      ],
+                          );
+                        },
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-                Container(
-                 
-                  width: width *5 / 10,
-                  height: 100 / 01,
-                  decoration: BoxDecoration(
-                    color: yellow,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 1, color: black),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(top: 6),
-                          child: Text(
-                            "Today's revenue",
-                            style: semiBoldBlack,
-                          ),
-                        ),
-                        Divider(
-                          thickness: 2,
-                          color: Colors.yellow.shade300,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 6),
-                          child: Text(
-                            '₹ ${state.report?.totalSales.round()}.00',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              color: black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
+              ),
+            ),
+            Container(
+              width: width * 5 / 10,
+              height: 100 / 01,
+              decoration: BoxDecoration(
+                color: yellow,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: black),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 6),
+                      child: Text(
+                        "Today's revenue",
+                        style: semiBoldBlack,
+                      ),
                     ),
-                  ),
+                    Divider(
+                      thickness: 2,
+                      color: Colors.yellow.shade300,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: BlocBuilder<SalesReportBloc,
+                          SalesReportState>(
+                        builder: (context, state) {
+                          return state is SalesReportLoading
+                              ? const ShimmerClass(
+                                 
+                                )
+                              : Text(
+                                  '₹ ${state.report?.totalSales.round()}.00',
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            );
-          },
+              ),
+            ),
+          ],
         ),
       ),
     );

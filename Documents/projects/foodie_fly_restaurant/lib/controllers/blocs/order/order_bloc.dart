@@ -14,28 +14,45 @@ part 'order_state.dart';
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
   OrderBloc() : super(OrderInitial()) {
     on<GetAllOrdersEvent>((event, emit) async {
-      final orders = await OrderApiService().getAllOrders();
-      emit(OrderState(orders: orders, orderItems: []));
+      emit(OrderLoading());
+      try {
+        final orders = await OrderApiService().getAllOrders();
+        emit(OrderLoaded(orders: orders, orderItems: []));
+      } catch (e) {
+        emit(OrderError(message: e.toString()));
+      }
     });
 
-   on<GetOrderByIdEvent>((event, emit) async {
-      final orders = await OrderApiService().getAllOrders();
-      final orderItems = await OrderApiService().getOrderById(event.orderId);
-      emit(OrderState(orders: orders, orderItems: orderItems));
-    });
-
-     on<UpdateStatusEvent>((event, emit) async {
-      final value =
-          await OrderApiService().updateStatus(event.orderId, event.status);
-      if (value) {
+    on<GetOrderByIdEvent>((event, emit) async {
+      emit(OrderLoading());
+      try {
         final orders = await OrderApiService().getAllOrders();
         final orderItems = await OrderApiService().getOrderById(event.orderId);
-        showSnack(event.context, Colors.green, 'Order Status updated.');
-        emit(OrderState(orders: orders, orderItems: orderItems));
-      } else {
-        showSnack(event.context, Colors.red, 'Order Status not updated.');
+        emit(OrderLoaded(orders: orders, orderItems: orderItems));
+      } catch (e) {
+        emit(OrderError(message: e.toString()));
+      }
+    });
+
+    on<UpdateStatusEvent>((event, emit) async {
+      emit(OrderLoading());
+      try {
+        final value =
+            await OrderApiService().updateStatus(event.orderId, event.status);
+        if (value) {
+          final orders = await OrderApiService().getAllOrders();
+          final orderItems =
+              await OrderApiService().getOrderById(event.orderId);
+          showSnack(event.context, Colors.green, 'Order Status updated.');
+          emit(OrderLoaded(orders: orders, orderItems: orderItems));
+        } else {
+          showSnack(event.context, Colors.red, 'Order Status not updated.');
+          emit(OrderError(message: 'Order Status not updated.'));
+        }
+      } catch (e) {
+        showSnack(event.context, Colors.red, 'An error occurred.');
+        emit(OrderError(message: e.toString()));
       }
     });
   }
 }
-

@@ -7,10 +7,8 @@ import 'package:foodie_fly_restaurant/models/dish.dart';
 import 'package:foodie_fly_restaurant/views/screens/main/screen_main_page.dart';
 import 'package:foodie_fly_restaurant/views/widgets/function_widgets/snackbar_function.dart';
 
-
 part 'dish_event.dart';
 part 'dish_state.dart';
-
 
 class DishBloc extends Bloc<DishEvent, DishState> {
   DishBloc() : super(DishInitial()) {
@@ -41,12 +39,18 @@ class DishBloc extends Bloc<DishEvent, DishState> {
     });
 
     on<GetDishesByCategoryEvent>((event, emit) async {
-      List<DishModel> dishes =
-          await DishApiServices().fetchDishesbyCategory(event.categoryId);
-      emit(GetDishesByCategoryState(dishes: dishes));
+      emit(GetDishesByCategoryState(dishes: [], isLoading: true));
+      try {
+        List<DishModel> dishes =
+            await DishApiServices().fetchDishesbyCategory(event.categoryId);
+        emit(GetDishesByCategoryState(dishes: dishes, isLoading: false));
+      } catch (e) {
+        emit(GetDishesByCategoryState(dishes: [], isLoading: false));
+      }
     });
 
     on<UpdateDishEvent>((event, emit) async {
+      emit(UpdateDishState(isLoading: true));
       final result = await DishApiServices().updateDish(event.dishModel);
       if (result) {
         emit(UpdateDishState(isLoading: false));
@@ -56,8 +60,8 @@ class DishBloc extends Bloc<DishEvent, DishState> {
         showSnack(event.context, Colors.red, 'Not updated.');
       }
       List<DishModel> dishes = await DishApiServices()
-          .fetchDishesbyCategory(event.dishModel.categoryId!);
-      emit(GetDishesByCategoryState(dishes: dishes));
+          .fetchDishesbyCategory(event.dishModel.categoryId);
+      emit(GetDishesByCategoryState(dishes: dishes,isLoading: false));
     });
   }
 }

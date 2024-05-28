@@ -66,31 +66,31 @@ class OfferApiServices {
   }
 
   //---------------------------updateOffer---------------------------//
-  // Future<bool> updateOffer(Offer offer) async {
-  //   try {
-  //     final token = await getToken();
-  //     // print("👇$token");
-  //     final response = await dio.put(
-  //       "${ApiEndPoints.getAllOffers}${offer.offerId}",
-  //       data: offer.toJson(offer),
-  //       options: Options(
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           'Accept': 'application/json',
-  //           'Authorization': 'Bearer $token',
-  //         },
-  //       ),
-  //     );
-  //     // print("🎉$response");
-  //     // print("🎉${response.statusCode}");
-  //     if(response.statusCode == 200){
-  //       return true;
-  //     }else{
-  //       return false;
-  //     }
-  //   } catch (e) {
-  //     log("🙌${e.toString()}");
-  //     return false;
-  //   }
-  // }
+  Future<bool> updateOffer(Offer offer) async {
+    try {
+      final token = await getToken();
+      print("👇$token");
+      final response = await dio.put(
+        "${ApiEndPoints.getAllOffers}${offer.offerId}",
+        data: offer.toJson(offer),
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer $token',
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      print("🎉$response");
+      print("🎉${response.statusCode}");
+      if(response.statusCode == 200){
+        return true;
+      }else{
+        return false;
+      }
+    } catch (e) {
+      print("🙌${e.toString()}");
+      return false;
+    }
+  }
 }

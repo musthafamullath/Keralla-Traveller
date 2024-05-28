@@ -9,3 +9,18 @@ class OrderState {
 final class OrderInitial extends OrderState {
   OrderInitial() : super(orders: [], orderItems: []);
 }
+
+class OrderLoading extends OrderState {
+  OrderLoading() : super(orders: [], orderItems: []);
+}
+
+class OrderLoaded extends OrderState {
+  OrderLoaded(
+      {required super.orders, required super.orderItems});
+}
+
+class OrderError extends OrderState {
+  final String message;
+
+  OrderError({required this.message}) : super(orders: [], orderItems: []);
+}
