@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:foodie_fly/controller/blocs/dish/dish_bloc.dart';
 import 'package:foodie_fly/model/category.dart';
+import 'package:foodie_fly/utils/constants.dart';
 import 'package:foodie_fly/utils/text_styles.dart';
 import 'package:foodie_fly/view/screen/category/widgets/dish_container.dart';
 import 'package:foodie_fly/view/widgets/class_widgets/app_bar_widget.dart';
@@ -26,7 +28,7 @@ class ScreenCategory extends StatelessWidget {
         child: BlocBuilder<DishBloc, DishState>(
           builder: (context, state) {
             if (state.isLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: SpinKitFadingCircle(color: yellowGreen,size: 100,));
             }
             return state.dishes.isEmpty
                 ? Center(

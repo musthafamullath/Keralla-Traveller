@@ -23,7 +23,7 @@ class AllOrders extends StatelessWidget {
     const Center(child: Text('List is Empty',style: semiBoldGrey,),)
     :
     Padding(
-      padding: const EdgeInsets.only(left: 15,right: 15),
+      padding: const EdgeInsets.only(left: 15,right: 15,top: 15),
       child: ListView.builder(
         itemCount: order.length,
         itemBuilder: (context, index) {

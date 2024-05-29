@@ -3,17 +3,30 @@ part of 'favorites_bloc.dart';
 class FavoritesState {
   final List<Dish> dishes;
   final int dishId;
-  FavoritesState({required this.dishes, required this.dishId});
+  final bool isLoading;
+  final String errorMessage;
+
+  FavoritesState({
+    required this.dishes,
+    required this.dishId,
+    this.isLoading = false,
+    this.errorMessage = '',
+  });
 }
 
-final class FavoritesInitial extends FavoritesState {
+class FavoritesInitial extends FavoritesState {
   FavoritesInitial() : super(dishes: [], dishId: 0);
 }
 
-final class AddTofavorite extends FavoritesState{
-  AddTofavorite() : super(dishId: 0,dishes: []);
+class FavoritesLoading extends FavoritesState {
+  FavoritesLoading() : super(dishes: [], dishId: 0, isLoading: true);
 }
 
-final class DeleteFromFavorite extends FavoritesState{
-  DeleteFromFavorite() : super(dishId: 0,dishes: []);
+class FavoritesLoaded extends FavoritesState {
+  FavoritesLoaded({required super.dishes, required super.dishId});
+}
+
+class FavoritesError extends FavoritesState {
+  FavoritesError({required super.errorMessage})
+      : super(dishes: [], dishId: 0);
 }

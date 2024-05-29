@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:foodie_fly/controller/blocs/dish/dish_bloc.dart';
 import 'package:foodie_fly/model/seller.dart';
 import 'package:foodie_fly/utils/constants.dart';
@@ -35,17 +36,22 @@ class ScreenRestaurantDishes extends StatelessWidget {
               BlocBuilder<DishBloc, DishState>(
                 builder: (context, state) {
                   return state.dishes.isEmpty
-                      ? const Center(
-                          child: Column(
-                            children: <Widget>[
-                              CircularProgressIndicator(),
-                              Text(
-                                "Please wait",
-                                style: semiBoldBlack,
-                              ),
-                            ],
+                      ? const Padding(
+                        padding:  EdgeInsets.only(top: 250),
+                        child:  Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SpinKitCubeGrid(color: yellowGreen,size: 50,),
+                                Text(
+                                  "Please wait",
+                                  style: semiBoldBlack,
+                                ),
+                              ],
+                            ),
                           ),
-                        )
+                      )
                       : ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: state.dishes.length,

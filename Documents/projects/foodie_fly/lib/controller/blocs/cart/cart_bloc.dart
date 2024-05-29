@@ -18,10 +18,13 @@ import 'package:foodie_fly/view/widgets/function_widgets/snackbar.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';
 
+
 class CartBloc extends Bloc<CartEvent, CartState> {
   int discount = 0;
+
   CartBloc() : super(CartInitial()) {
-   on<GetAllCartItemsEvent>((event, emit) async {
+    on<GetAllCartItemsEvent>((event, emit) async {
+      emit(CartLoading());
       List<CartItem> cartItems = await CartApiService().getAllCartItems();
       final total = sum(cartItems);
       emit(GetAllCartItemsState(
@@ -31,7 +34,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           couponCode: ''));
     });
 
-      on<AddToCartEvent>((event, emit) async {
+    on<AddToCartEvent>((event, emit) async {
+      // emit(CartLoading());
       final value = await CartApiService().addToCart(event.dishId);
       final cartItems = await CartApiService().getAllCartItems();
       final total = sum(cartItems);
@@ -42,15 +46,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             total: total,
             discount: discount,
             couponCode: ''));
-            // emit(AddToCartState());
       } else {
         showSnack(
-            event.context, Colors.red, 'Select dish from same resturant.');
-            // emit(GetAllCartItemsFaildState());
+            event.context, Colors.red, 'Select dish from same restaurant.');
       }
     });
 
-      on<DecreaseCartEvent>((event, emit) async {
+    on<DecreaseCartEvent>((event, emit) async {
+      // emit(CartLoading());
       final value = await CartApiService().decreaseFromCart(event.dishId);
       final cartItems = await CartApiService().getAllCartItems();
       int total = sum(cartItems);
@@ -63,17 +66,17 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             couponCode: ''));
       } else {
         showSnack(
-            event.context, Colors.red, 'Choose dish from same resturant.');
-            // emit(GetAllCartItemsFaildState());
+            event.context, Colors.red, 'Choose dish from same restaurant.');
       }
     });
 
-        on<DeleteItemFromCartEvent>((event, emit) async {
+    on<DeleteItemFromCartEvent>((event, emit) async {
+      // emit(CartLoading());
       final value = await CartApiService().deleteItemFromCart(event.dishId);
       final cartItems = await CartApiService().getAllCartItems();
       int total = sum(cartItems);
       if (value) {
-        showSnack(event.context, Colors.green, 'Decreased from cart');
+        showSnack(event.context, Colors.green, 'Removed from cart');
         emit(GetAllCartItemsState(
             cartItems: cartItems,
             total: total,
@@ -81,38 +84,24 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             couponCode: ''));
       } else {
         showSnack(
-            event.context, Colors.red, 'Select dish from same resturant.');
-            // emit(GetAllCartItemsFaildState());
+            event.context, Colors.red, 'Select dish from same restaurant.');
       }
     });
 
-  
     on<GetAllCouponsEvent>((event, emit) async {
+      // emit(CartLoading());
       final coupons = await CouponApiServices().getAllCoupons();
-      final cartItems = await CartApiService().getAllCartItems();
-      int total = sum(cartItems);
       emit(GetAllCouponsState(coupons: coupons));
-      emit(GetAllCartItemsState(
-          cartItems: cartItems,
-          total: total,
-          discount: discount,
-          couponCode: ''));
     });
 
-      on<GetAvailableCouponsEvent>((event, emit) async {
+    on<GetAvailableCouponsEvent>((event, emit) async {
+      // emit(CartLoading());
       final coupons = await CouponApiServices().getAvailableCoupons();
-      final cartItems = await CartApiService().getAllCartItems();
-      int total = sum(cartItems);
       emit(GetAllCouponsState(coupons: coupons));
-      emit(GetAllCartItemsState(
-        cartItems: cartItems,
-        total: total,
-        discount: discount,
-        couponCode: '',
-      ));
     });
 
     on<RedeemCouponEvent>((event, emit) async {
+      // emit(CartLoading());
       final coupons = await CouponApiServices().getAvailableCoupons();
       final cartItems = await CartApiService().getAllCartItems();
       int total = sum(cartItems);
@@ -129,20 +118,19 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     });
 
     on<CheckoutEvent>((event, emit) async {
+      // emit(CartLoading());
       final value = await CheckOutApiServices().checkOut(event.checkOut);
       if (value == null) {
         showSnack(event.context, Colors.green, 'Order Placed Successfully.');
         Navigator.of(event.context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => ScreenMainPage()),
             (route) => false);
-            // emit(CheckOutSuccessState());
       } else {
         Navigator.of(event.context).push(
           MaterialPageRoute(
             builder: (context) => ScreenPayment(response: value),
           ),
         );
-        //  emit(CheckOutFaildState());
       }
     });
   }

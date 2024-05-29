@@ -9,16 +9,15 @@ part 'order_state.dart';
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
   OrderBloc() : super(OrderInitial()) {
     on<GetAllOrdersEvent>((event, emit) async {
+      emit(OrderState(orders: [], orderItems: [], loading: true));
       final orders = await OrdersApiServices().getAllOrders();
-      emit(OrderState(orders: orders, orderItems: []));
+      emit(OrderState(orders: orders, orderItems: [], loading: false));
     });
 
     on<GetOrderByIdEvent>((event, emit) async {
-      final orders = await OrdersApiServices().getAllOrders();
+      emit(OrderState(orders: state.orders, orderItems: [], loading: true));
       final orderItems = await OrdersApiServices().getOrderById(event.orderId);
-      emit(OrderState(orders: orders, orderItems: orderItems));
+      emit(OrderState(orders: state.orders, orderItems: orderItems, loading: false));
     });
   }
 }
-
-class OrderApiServices {}

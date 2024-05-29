@@ -16,36 +16,51 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
 
   FutureOr<void> restaurantEvent(
       RestaurantEvent event, Emitter<RestaurantState> emit) async {
-    List<Seller> restaurants = await SellerApiServices().fetchAllSellers();
-    emit(RestaurantState(restaurants: restaurants));
+    emit(RestaurantLoading());
+    try {
+      List<Seller> restaurants = await SellerApiServices().fetchAllSellers();
+      emit(RestaurantLoaded(restaurants: restaurants));
+    } catch (e) {
+      emit(RestaurantError(message: e.toString()));
+    }
   }
 
   FutureOr<void> searchRestaurantEvent(
       SearchRestaurantEvent event, Emitter<RestaurantState> emit) async {
-    List<Seller> restaurants =
-        await SellerApiServices().searchSeller(event.query);
-    emit(RestaurantState(restaurants: restaurants));
+    emit(RestaurantLoading());
+    try {
+      List<Seller> restaurants =
+          await SellerApiServices().searchSeller(event.query);
+      emit(RestaurantLoaded(restaurants: restaurants));
+    } catch (e) {
+      emit(RestaurantError(message: e.toString()));
+    }
   }
 
   FutureOr<void> getRestaurantByEvent(
       GetRestaurantByEvent event, Emitter<RestaurantState> emit) async {
-    final restaurant =
-        await SellerApiServices().getSellerById(event.sellerId);
-    if (restaurant == null) {
-      final restaurant = Seller(
-        id: 0,
-        name: "name",
-        description: 'description',
-        email: "email",
-        pinCode: "pincode",
-      );
-      List<Seller> restaurants =
-          await SellerApiServices().fetchAllSellers();
-      emit(RestaurantState(restaurants: restaurants, seller: restaurant));
-    } else {
-      List<Seller> restaurants =
-          await SellerApiServices().fetchAllSellers();
-      emit(RestaurantState(restaurants: restaurants, seller: restaurant));
+    emit(RestaurantLoading());
+    try {
+      final restaurant =
+          await SellerApiServices().getSellerById(event.sellerId);
+      if (restaurant == null) {
+        final fallbackRestaurant = Seller(
+          id: 0,
+          name: "name",
+          description: 'description',
+          email: "email",
+          pinCode: "pincode",
+        );
+        List<Seller> restaurants =
+            await SellerApiServices().fetchAllSellers();
+        emit(RestaurantLoaded(restaurants: restaurants, seller: fallbackRestaurant));
+      } else {
+        List<Seller> restaurants =
+            await SellerApiServices().fetchAllSellers();
+        emit(RestaurantLoaded(restaurants: restaurants, seller: restaurant));
+      }
+    } catch (e) {
+      emit(RestaurantError(message: e.toString()));
     }
   }
 }

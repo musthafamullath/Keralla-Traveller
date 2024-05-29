@@ -18,43 +18,46 @@ class SplashScreenPage extends StatefulWidget {
 class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   void initState() {
-    // checkUserOnBoarding();
-    checkUserLogin(context);
     super.initState();
+    checkUserLogin();
   }
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: yellowGreen,
-      body:  SplashComponeses(),
+      body: SplashComponeses(),
     );
   }
 
-  Future<void> checkUserLogin(context) async {
+  Future<void> checkUserLogin() async {
     final preferences = await SharedPreferences.getInstance();
-    final userBoardaring = preferences.getBool('ON_BORD');
-    final userLoggedIn = preferences.getBool('LOGIN');
-    if(userBoardaring == null || userBoardaring == false){
-      await Future.delayed(const Duration(seconds: 3));
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const ScreenOnBoarding(),)
-      );
-    }
-    else if (userLoggedIn == null || userLoggedIn == false) {
-      await Future.delayed(const Duration(seconds: 3));
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const ScreenLoginRestration(),
-        ),
-      );
+    final userOnboarding = preferences.getBool('ON_BOARD') ?? false;
+    final userLoggedIn = preferences.getBool('LOGIN') ?? false;
+    await Future.delayed(const Duration(seconds: 3));
+
+    if (!userOnboarding) {
+      if (context.mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const ScreenOnBoarding()),
+        );
+      }
+    } else if (!userLoggedIn) {
+      if (context.mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const ScreenLoginRestration(),
+          ),
+        );
+      }
     } else {
-      await Future.delayed(const Duration(seconds: 3));
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => ScreenMainPage(),
-        ),
-      );
+      if (context.mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => ScreenMainPage(),
+          ),
+        );
+      }
     }
   }
 }

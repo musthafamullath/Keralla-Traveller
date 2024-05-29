@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:foodie_fly/controller/api_sevices/sellers/api_calling.dart';
 import 'package:foodie_fly/controller/blocs/dish/dish_bloc.dart';
 import 'package:foodie_fly/model/seller.dart';
@@ -35,8 +36,8 @@ class ScreenRestaurantDishes extends StatelessWidget {
             BlocBuilder<DishBloc, DishState>(
               builder: (context, state) {
                 return state.dishes.isEmpty
-                    ? Center(
-                        child: Image.asset('assets/images/icons/empty.gif'))
+                    ? const Center(
+                        child: Center(child: SpinKitCubeGrid(color: yellowGreen,size: 50,),))
                     : Expanded(
                         child: ListView.builder(
                           itemBuilder: ((context, index) {

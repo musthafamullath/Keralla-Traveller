@@ -19,7 +19,7 @@ import 'package:foodie_fly/controller/cubits/toggle_repasswod/toggle_repassword_
 import 'package:foodie_fly/utils/constants.dart';
 import 'package:foodie_fly/view/screen/splash/screen_splash_page.dart';
 
-void main() {
+void main() { 
   runApp(const MyApp());
 }
 
@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'K2D',
         ),
         home: const SplashScreenPage(),
+        
       ),
     );
   }

@@ -2,18 +2,16 @@ part of 'favorites_bloc.dart';
 
 class FavoritesEvent {}
 
-final class AddToFavoritesEvent extends FavoritesEvent {
+class AddToFavoritesEvent extends FavoritesEvent {
   final int dishId;
-  
-  AddToFavoritesEvent({required this.dishId,});
+
+  AddToFavoritesEvent({required this.dishId});
 }
 
-final class DeleteFromFavoritesEvent extends FavoritesEvent {
+class DeleteFromFavoritesEvent extends FavoritesEvent {
   final int dishId;
-  
 
-  DeleteFromFavoritesEvent({required this.dishId, required BuildContext context,});
+  DeleteFromFavoritesEvent({required this.dishId});
 }
 
-final class GetAllFavoritesEvent extends FavoritesEvent {}
-
+class GetAllFavoritesEvent extends FavoritesEvent {}

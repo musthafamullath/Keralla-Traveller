@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:foodie_fly/controller/blocs/restaurant/restaurant_bloc.dart';
 import 'package:foodie_fly/utils/constants.dart';
 import 'package:foodie_fly/utils/text_styles.dart';
@@ -34,17 +35,20 @@ class ScreenRestaurants extends StatelessWidget {
                   const SearchTextField(text: "Search restaurants..."),
                   kHight10,
                   state.restaurants.isEmpty
-                      ? const Center(
-                          child: Column(
-                            children: <Widget>[
-                              CircularProgressIndicator(),
-                              Text(
-                                "Please wait",
-                                style: semiBoldBlack,
-                              ),
-                            ],
+                      ? const Padding(
+                        padding:  EdgeInsets.only(top: 250),
+                        child:  Center(
+                            child: Column(
+                              children: <Widget>[
+                                SpinKitCubeGrid(color: yellowGreen,size: 50,),
+                                Text(
+                                  "Please wait",
+                                  style: semiBoldBlack,
+                                ),
+                              ],
+                            ),
                           ),
-                        )
+                      )
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -168,7 +172,7 @@ class ScreenRestaurants extends StatelessWidget {
                                             children: <Widget>[
                                               Text(
                                                 state.restaurants[index].name,
-                                                style: semiBoldWhite,
+                                                style: semiBoldBlack,
                                               ),
                                               Text(
                                                 state.restaurants[index]

@@ -1,6 +1,9 @@
+// ignore_for_file: unused_element, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:foodie_fly/utils/text_styles.dart';
 import 'package:foodie_fly/view/screen/signup_login/screen_login_and_signup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NextButton extends StatelessWidget {
   const NextButton({super.key, required this.width, required this.position});
@@ -19,9 +22,13 @@ class NextButton extends StatelessWidget {
             padding: const EdgeInsets.only(right: 50),
             child: ElevatedButton(
               onPressed: () async {
-                // ignore: use_build_context_synchronously
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const ScreenLoginRestration() ));
+                if(position == 2){
+                  await _completeOnboarding(context);
+                }else{
+                  await _skipOnboarding(context);
+                }
+                // Navigator.of(context).pushReplacement(
+                //     MaterialPageRoute(builder: (context) => const ScreenLoginRestration() ));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
@@ -33,6 +40,21 @@ class NextButton extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+    Future<void> _completeOnboarding(BuildContext context) async {
+    final preferences = await SharedPreferences.getInstance();
+    await preferences.setBool('ON_BOARD', true);
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => const ScreenLoginRestration()),
+    );
+  }
+
+  Future<void> _skipOnboarding(BuildContext context) async {
+    final preferences = await SharedPreferences.getInstance();
+    await preferences.setBool('ON_BOARD', true);
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => const ScreenLoginRestration()),
     );
   }
 }
